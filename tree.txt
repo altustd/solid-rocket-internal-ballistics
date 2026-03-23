@@ -1,0 +1,16 @@
+solid-rocket-internal-ballistics/
+├── _quarto.yml
+├── index.qmd
+├── references.bib
+├── chapters/
+│   ├── 01-intro.qmd
+│   ├── 02-propellants.qmd
+│   ├── 03-grain-design.qmd
+│   ├── 04-internal-ballistics.qmd
+│   ├── 05-burning-rate.qmd
+│   ├── 06-grain-burnback.qmd
+│   ├── 07-transients-stability.qmd
+│   ├── 08-numerical-modeling.qmd
+│   └── 09-applications-examples.qmd
+├── images/        
+└── code/            # optional Python/MATLAB/ SymPy scripts

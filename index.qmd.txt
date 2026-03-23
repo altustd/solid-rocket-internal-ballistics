@@ -1,0 +1,20 @@
+---
+title: "Solid Propellant Rocket Motors"
+subtitle: "Emphasis on Internal Ballistics"
+---
+
+This book provides a comprehensive treatment of solid-propellant rocket motors (SRMs), with a strong focus on **internal ballistics** — the processes that govern chamber pressure, thrust, and performance as the propellant burns.
+
+## Topics Covered
+
+- Propellant chemistry and combustion
+- Grain geometry and burnback
+- Steady-state and transient internal ballistics
+- Burning-rate laws (Vieille/Saint-Robert, erosive burning, dynamic burning)
+- Numerical modeling and modern CFD approaches
+- Real-world examples and design considerations
+
+Render the book with:
+
+```bash
+quarto render
