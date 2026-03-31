@@ -1,0 +1,222 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Solid Propellant Rocket Motors: Internal Ballistics",
+    "section": "",
+    "text": "1 Welcome\nThis book presents a technical deep-dive into the internal ballistics of solid propellant rocket motors — from fundamental combustion physics to practical design and simulation methods.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Solid Propellant Rocket Motors: Internal Ballistics</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#what-this-book-covers",
+    "href": "index.html#what-this-book-covers",
+    "title": "Solid Propellant Rocket Motors: Internal Ballistics",
+    "section": "1.1 What This Book Covers",
+    "text": "1.1 What This Book Covers\nFundamentals - Propellant chemistry and combustion - Burning rate laws and scaling effects - Solid grain geometry and design principles\nCore Internal Ballistics - Chamber pressure prediction - Mass generation and flow balance - Thrust curve generation - Specific impulse and performance metrics\nAdvanced Topics - Transient behavior and ignition - Erosive burning and stability - Numerical modeling techniques",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Solid Propellant Rocket Motors: Internal Ballistics</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#who-this-book-is-for",
+    "href": "index.html#who-this-book-is-for",
+    "title": "Solid Propellant Rocket Motors: Internal Ballistics",
+    "section": "1.2 Who This Book Is For",
+    "text": "1.2 Who This Book Is For\n\nAmateur and experimental rocketeers\nAerospace engineering students\nHobbyists building solid rocket motors\nAnyone interested in the science behind solid propulsion",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Solid Propellant Rocket Motors: Internal Ballistics</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use-this-book",
+    "href": "index.html#how-to-use-this-book",
+    "title": "Solid Propellant Rocket Motors: Internal Ballistics",
+    "section": "1.3 How to Use This Book",
+    "text": "1.3 How to Use This Book\n\nNavigate using the sidebar\nEquations are rendered with LaTeX\nCode examples (when added) can be executed interactively\nAll chapters are designed to build progressively\n\n\n\n\n\n\n\nTip\n\n\n\nThis is a living document. New chapters, examples, and simulation code will be added regularly.\n\n\nFeedback and contributions are welcome.\n\nLast updated: r format(Sys.Date(), \"%B %Y\")",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Solid Propellant Rocket Motors: Internal Ballistics</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-intro.html",
+    "href": "chapters/01-intro.html",
+    "title": "2  Introduction to Solid Rocket Internal Ballistics",
+    "section": "",
+    "text": "2.1 What is Internal Ballistics?\nSolid rocket motors are widely used in missiles, launch vehicles, and amateur rocketry due to their simplicity, reliability, and high thrust-to-weight ratio.\nInternal ballistics is the study of the processes occurring inside the rocket motor from ignition until burnout. It includes:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Solid Rocket Internal Ballistics</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-intro.html#what-is-internal-ballistics",
+    "href": "chapters/01-intro.html#what-is-internal-ballistics",
+    "title": "2  Introduction to Solid Rocket Internal Ballistics",
+    "section": "",
+    "text": "Ignition and flame spreading\nPropellant combustion\nGas generation and pressure buildup\nNozzle flow and thrust generation",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Solid Rocket Internal Ballistics</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-intro.html#why-it-matters",
+    "href": "chapters/01-intro.html#why-it-matters",
+    "title": "2  Introduction to Solid Rocket Internal Ballistics",
+    "section": "2.2 Why It Matters",
+    "text": "2.2 Why It Matters\nAccurate internal ballistics modeling allows engineers to: - Predict pressure-time curves - Optimize grain geometry - Ensure structural integrity - Maximize performance and safety\nThis book focuses on the theoretical foundations and practical computational methods used in solid rocket motor design.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Solid Rocket Internal Ballistics</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-propellants.html",
+    "href": "chapters/02-propellants.html",
+    "title": "3  Solid Propellants",
+    "section": "",
+    "text": "3.1 Introduction\nSolid propellants are energetic materials that contain both fuel and oxidizer in a solid matrix. They are the heart of solid rocket motors, providing the chemical energy converted into thrust.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Solid Propellants</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-propellants.html#classification-of-solid-propellants",
+    "href": "chapters/02-propellants.html#classification-of-solid-propellants",
+    "title": "3  Solid Propellants",
+    "section": "3.2 Classification of Solid Propellants",
+    "text": "3.2 Classification of Solid Propellants\n\n3.2.1 Double-Base Propellants\n\nComposed primarily of nitrocellulose and nitroglycerin\nHomogeneous (uniform composition)\nCommon in older tactical missiles\n\n\n\n3.2.2 Composite Propellants\n\nMost widely used today\nHeterogeneous: oxidizer crystals (usually AP — ammonium perchlorate) suspended in a fuel binder (HTPB, PBAN, etc.)\nHigher performance and better mechanical properties\n\n\n\n3.2.3 Composite Modified Double-Base (CMDB)\n\nHybrid of the two above",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Solid Propellants</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-propellants.html#key-ingredients",
+    "href": "chapters/02-propellants.html#key-ingredients",
+    "title": "3  Solid Propellants",
+    "section": "3.3 Key Ingredients",
+    "text": "3.3 Key Ingredients\n\nOxidizer: Ammonium Perchlorate (AP), Ammonium Nitrate (AN)\nFuel/Binder: Hydroxyl-terminated polybutadiene (HTPB), Polybutadiene acrylonitrile (PBAN)\nMetal Fuel: Aluminum powder (increases specific impulse and density)\nBurn Rate Modifiers: Iron oxide, copper chromite\nPlasticizers and Curatives",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Solid Propellants</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-propellants.html#important-properties",
+    "href": "chapters/02-propellants.html#important-properties",
+    "title": "3  Solid Propellants",
+    "section": "3.4 Important Properties",
+    "text": "3.4 Important Properties\n\nBurning rate (typically 5–25 mm/s at 70 bar)\nPressure exponent (n in Saint-Robert’s law: \\(r = a P^n\\))\nDensity\nMechanical properties (tensile strength, elongation)\nSensitivity (shock, friction, thermal)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Solid Propellants</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-propellants.html#burning-rate-law-vieilles-saint-roberts-law",
+    "href": "chapters/02-propellants.html#burning-rate-law-vieilles-saint-roberts-law",
+    "title": "3  Solid Propellants",
+    "section": "3.5 Burning Rate Law (Vieille’s / Saint-Robert’s Law)",
+    "text": "3.5 Burning Rate Law (Vieille’s / Saint-Robert’s Law)\n\\[\nr = a P^n\n\\]\nWhere: - \\(r\\) = linear burning rate (mm/s) - \\(P\\) = chamber pressure (bar or MPa) - \\(a\\) = burn rate coefficient (pressure and temperature dependent) - \\(n\\) = pressure exponent (usually 0.2 – 0.7)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Solid Propellants</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-propellants.html#next-steps",
+    "href": "chapters/02-propellants.html#next-steps",
+    "title": "3  Solid Propellants",
+    "section": "3.6 Next Steps",
+    "text": "3.6 Next Steps\nIn the following chapters we will explore how propellant properties, grain geometry, and nozzle design interact to determine the internal ballistics behavior of a solid rocket motor.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Solid Propellants</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-grain-design.html",
+    "href": "chapters/03-grain-design.html",
+    "title": "4  Grain Design and Geometry",
+    "section": "",
+    "text": "4.1 Introduction\nGrain design is one of the most critical aspects of solid rocket motor performance. The shape of the propellant grain controls how the burning surface area evolves over time, which directly determines the thrust profile of the motor.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Grain Design and Geometry</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-grain-design.html#key-concepts",
+    "href": "chapters/03-grain-design.html#key-concepts",
+    "title": "4  Grain Design and Geometry",
+    "section": "4.2 Key Concepts",
+    "text": "4.2 Key Concepts\n\n4.2.1 Web Thickness\nThe web thickness is the minimum distance the burning surface must regress before the grain is fully consumed.\n\n\n4.2.2 Burning Surface Area \\(A_b(t)\\)\nThe evolution of burning surface area is the core variable in grain design:\n\\[\nA_b(t) = f(\\text{grain geometry}, \\text{web distance burned})\n\\]\nGrain geometries produce three main burning behaviors: - Neutral: Roughly constant thrust - Progressive: Thrust increases with time - Regressive: Thrust decreases with time",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Grain Design and Geometry</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-grain-design.html#common-grain-geometries",
+    "href": "chapters/03-grain-design.html#common-grain-geometries",
+    "title": "4  Grain Design and Geometry",
+    "section": "4.3 Common Grain Geometries",
+    "text": "4.3 Common Grain Geometries\n\nCylindrical (core-burning)\nStar grains\nFinocyl (fin-in-cylinder)\nWagon wheel / dendrite\nConical and tapered grains",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Grain Design and Geometry</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-grain-design.html#important-design-parameters",
+    "href": "chapters/03-grain-design.html#important-design-parameters",
+    "title": "4  Grain Design and Geometry",
+    "section": "4.4 Important Design Parameters",
+    "text": "4.4 Important Design Parameters\n\nKn ratio (\\(K_n = A_b / A_t\\))\nVolumetric loading fraction\nLength-to-diameter (L/D) ratio\nSliver fraction (unburned propellant at burnout)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Grain Design and Geometry</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-grain-design.html#link-to-internal-ballistics",
+    "href": "chapters/03-grain-design.html#link-to-internal-ballistics",
+    "title": "4  Grain Design and Geometry",
+    "section": "4.5 Link to Internal Ballistics",
+    "text": "4.5 Link to Internal Ballistics\nGrain geometry combined with burning rate laws determines the pressure-time curve. A well-designed grain allows engineers to tailor thrust profiles for specific missions.\nThe next chapter explores the detailed equations of internal ballistics.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Grain Design and Geometry</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-internal-ballistics.html",
+    "href": "chapters/04-internal-ballistics.html",
+    "title": "5  Internal Ballistics Core",
+    "section": "",
+    "text": "5.1 What is Internal Ballistics?\nInternal ballistics is the study of the physical and chemical processes occurring inside a solid rocket motor from ignition until burnout. It bridges propellant chemistry and external performance (thrust, trajectory).\nThe primary goal is to predict and control the pressure-time curve (\\(P\\)-\\(t\\) curve), which directly determines thrust, burn time, and total impulse.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Internal Ballistics Core</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-internal-ballistics.html#fundamental-balance-equations",
+    "href": "chapters/04-internal-ballistics.html#fundamental-balance-equations",
+    "title": "5  Internal Ballistics Core",
+    "section": "5.2 Fundamental Balance Equations",
+    "text": "5.2 Fundamental Balance Equations\n\n5.2.1 1. Mass Conservation (Mass Generation)\nThe rate at which gas is generated by the burning propellant must equal the rate at which gas is expelled through the nozzle (plus any accumulation in the chamber):\n\\[\n\\frac{dm}{dt} = \\dot{m}_\\text{gen} - \\dot{m}_\\text{out}\n\\]\nWhere: - \\(\\dot{m}_\\text{gen} = \\rho_p \\cdot A_b \\cdot r\\) (mass generation rate) - \\(\\rho_p\\) = propellant density - \\(A_b\\) = burning surface area - \\(r\\) = linear burning rate\n\n\n5.2.2 2. Energy and Pressure Relationship\nUsing the ideal gas law and isentropic assumptions, chamber pressure is related to the mass in the chamber:\n\\[\nP_c = \\frac{m R T_c}{V_c}\n\\]\n\n\n5.2.3 3. Nozzle Flow (Choked Flow)\nFor typical rocket motors operating with choked flow at the throat:\n\\[\n\\dot{m}_\\text{out} = \\frac{P_c A_t}{\\sqrt{T_c}} \\cdot \\Gamma \\sqrt{\\frac{\\gamma}{R}}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Internal Ballistics Core</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-internal-ballistics.html#the-equilibrium-pressure-concept",
+    "href": "chapters/04-internal-ballistics.html#the-equilibrium-pressure-concept",
+    "title": "5  Internal Ballistics Core",
+    "section": "5.3 The Equilibrium Pressure Concept",
+    "text": "5.3 The Equilibrium Pressure Concept\nIn steady-state operation, mass generation equals mass expulsion:\n\\[\n\\rho_p A_b r = \\frac{P_c A_t C_d}{\\sqrt{T_c}}\n\\]\nThis relationship leads to the famous Saint-Robert’s Law coupling with burning surface area:\n\\[\nP_c = \\left( \\frac{\\rho_p a A_b}{A_t C_d} \\right)^{\\frac{1}{1-n}}\n\\]\nWhere: - \\(a, n\\) = burning rate coefficients (\\(r = a P^n\\)) - \\(C_d\\) = discharge coefficient",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Internal Ballistics Core</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-internal-ballistics.html#key-performance-parameters",
+    "href": "chapters/04-internal-ballistics.html#key-performance-parameters",
+    "title": "5  Internal Ballistics Core",
+    "section": "5.4 Key Performance Parameters",
+    "text": "5.4 Key Performance Parameters",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Internal Ballistics Core</span>"
+    ]
+  }
+]
