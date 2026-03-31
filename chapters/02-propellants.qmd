@@ -1,0 +1,53 @@
+# Solid Propellants
+
+## Introduction
+
+Solid propellants are energetic materials that contain both fuel and oxidizer in a solid matrix. They are the heart of solid rocket motors, providing the chemical energy converted into thrust.
+
+## Classification of Solid Propellants
+
+### Double-Base Propellants
+- Composed primarily of nitrocellulose and nitroglycerin
+- Homogeneous (uniform composition)
+- Common in older tactical missiles
+
+### Composite Propellants
+- Most widely used today
+- Heterogeneous: oxidizer crystals (usually AP — ammonium perchlorate) suspended in a fuel binder (HTPB, PBAN, etc.)
+- Higher performance and better mechanical properties
+
+### Composite Modified Double-Base (CMDB)
+- Hybrid of the two above
+
+## Key Ingredients
+
+- **Oxidizer**: Ammonium Perchlorate (AP), Ammonium Nitrate (AN)
+- **Fuel/Binder**: Hydroxyl-terminated polybutadiene (HTPB), Polybutadiene acrylonitrile (PBAN)
+- **Metal Fuel**: Aluminum powder (increases specific impulse and density)
+- **Burn Rate Modifiers**: Iron oxide, copper chromite
+- **Plasticizers and Curatives**
+
+## Important Properties
+
+- Burning rate (typically 5–25 mm/s at 70 bar)
+- Pressure exponent (`n` in Saint-Robert's law: $r = a P^n$)
+- Density
+- Mechanical properties (tensile strength, elongation)
+- Sensitivity (shock, friction, thermal)
+
+## Burning Rate Law (Vieille's / Saint-Robert's Law)
+
+$$
+r = a P^n
+$$
+
+Where:
+- $r$ = linear burning rate (mm/s)
+- $P$ = chamber pressure (bar or MPa)
+- $a$ = burn rate coefficient (pressure and temperature dependent)
+- $n$ = pressure exponent (usually 0.2 – 0.7)
+
+## Next Steps
+
+In the following chapters we will explore how propellant properties, grain geometry, and nozzle design interact to determine the internal ballistics behavior of a solid rocket motor.
+

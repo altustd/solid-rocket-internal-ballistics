@@ -4,5 +4,11 @@
   },
   "chapters/01-intro.qmd": {
     "01-intro.html": "5d10e165"
+  },
+  "chapters/02-propellants.qmd": {
+    "02-propellants.html": "de0412ca"
+  },
+  "chapters/04-internal-ballistics.qmd": {
+    "04-internal-ballistics.html": "09ec97d6"
   }
 }

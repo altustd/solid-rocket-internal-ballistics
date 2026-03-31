@@ -1,0 +1,92 @@
+/* ================================================
+   Custom Styles for Solid Rocket Internal Ballistics
+   ================================================ */
+
+/* Improve readability and technical feel */
+body {
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+  line-height: 1.7;
+}
+
+/* Better heading hierarchy */
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: #1f2a44;
+}
+
+h1.title {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.35rem;
+  color: #555;
+  font-weight: 400;
+}
+
+/* Callouts - make them stand out for technical notes */
+.callout-tip {
+  border-left-color: #2e7d32;
+  background-color: #f1f8e9;
+}
+
+.callout-note {
+  border-left-color: #1976d2;
+  background-color: #e3f2fd;
+}
+
+.callout-warning {
+  border-left-color: #f57c00;
+  background-color: #fff3e0;
+}
+
+/* Equations look better with more spacing */
+.math.display {
+  margin: 1.8em 0;
+  padding: 0.8em 0;
+}
+
+/* Improve code blocks for technical content */
+pre > code {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* Table styling for data and comparisons */
+table {
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+table th, table td {
+  padding: 0.75em 1em;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+/* Sidebar improvements */
+.sidebar {
+  font-size: 0.95rem;
+}
+
+/* Make equations more prominent */
+.katex-display {
+  margin: 2em 0;
+}
+
+/* Custom color for rocket/aerospace theme */
+:root {
+  --primary: #1f2a44;
+  --accent: #c8102e;   /* Rocket red */
+}
+
+/* Highlight important terms */
+strong.rocket-term {
+  color: var(--accent);
+  font-weight: 600;
+}
