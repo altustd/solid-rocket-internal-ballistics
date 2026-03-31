@@ -10,5 +10,11 @@
   },
   "chapters/04-internal-ballistics.qmd": {
     "04-internal-ballistics.html": "09ec97d6"
+  },
+  "chapters/03-grain-design.qmd": {
+    "03-grain-design.html": "63ff6ab5"
+  },
+  "chapters/05-burning-rate-and-kn.qmd": {
+    "05-burning-rate-and-kn.html": "9c55f7e7"
   }
 }

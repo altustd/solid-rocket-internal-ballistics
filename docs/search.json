@@ -218,5 +218,85 @@
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Internal Ballistics Core</span>"
     ]
+  },
+  {
+    "objectID": "chapters/05-burning-rate-and-kn.html",
+    "href": "chapters/05-burning-rate-and-kn.html",
+    "title": "6  Burning Rate, Kn Ratio, and Ballistic Performance",
+    "section": "",
+    "text": "7 Burning Rate, Kn Ratio, and Ballistic Performance",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Burning Rate, Kn Ratio, and Ballistic Performance</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-burning-rate-and-kn.html#learning-objectives",
+    "href": "chapters/05-burning-rate-and-kn.html#learning-objectives",
+    "title": "6  Burning Rate, Kn Ratio, and Ballistic Performance",
+    "section": "7.1 Learning Objectives",
+    "text": "7.1 Learning Objectives\n\nUnderstand the difference between strand burning rate and motor burning rate\nLearn the Saint-Robert’s burning rate law (r = a P^n)\nDefine and calculate the Kn ratio (Kn = A_b / A_t)\nUnderstand how Kn controls chamber pressure\nPredict basic pressure-time and thrust-time curves",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Burning Rate, Kn Ratio, and Ballistic Performance</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-burning-rate-and-kn.html#burning-rate-fundamentals",
+    "href": "chapters/05-burning-rate-and-kn.html#burning-rate-fundamentals",
+    "title": "6  Burning Rate, Kn Ratio, and Ballistic Performance",
+    "section": "7.2 Burning Rate Fundamentals",
+    "text": "7.2 Burning Rate Fundamentals\nThe burning rate (r_b) is the speed at which the propellant surface regresses.\nIn strand burners (Crawford bomb), we measure burning rate under controlled pressure.\nIn actual motors, the burning rate is influenced by:\n\nChamber pressure (P_c)\nPropellant initial temperature\nErosive burning (high gas flow velocity)\nDynamic burning (transient effects)\n\n\n7.2.1 Saint-Robert’s Law (Vieille’s Law)\n\\[\nr_b = a \\cdot P_c^n\n\\]\nWhere: - a = burning rate coefficient - n = pressure exponent (usually 0.2 – 0.7 for stable motors) - P_c = chamber pressure",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Burning Rate, Kn Ratio, and Ballistic Performance</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-burning-rate-and-kn.html#the-kn-ratio",
+    "href": "chapters/05-burning-rate-and-kn.html#the-kn-ratio",
+    "title": "6  Burning Rate, Kn Ratio, and Ballistic Performance",
+    "section": "7.3 The Kn Ratio",
+    "text": "7.3 The Kn Ratio\nThe Kn ratio is one of the most important parameters in solid rocket motor design:\n\\[\nKn = \\frac{A_b}{A_t}\n\\]\n\nA_b = instantaneous burning surface area\nA_t = nozzle throat area\n\nWhy it matters:\nFor steady-state burning, chamber pressure is approximately:\n\\[\nP_c \\approx \\left( \\frac{Kn \\cdot a \\cdot \\rho_p \\cdot c^*}{1} \\right)^{\\frac{1}{1-n}}\n\\]\n(where c* is characteristic velocity)\nHigher Kn → Higher chamber pressure → Higher burning rate → Even higher pressure (positive feedback until equilibrium).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Burning Rate, Kn Ratio, and Ballistic Performance</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-burning-rate-and-kn.html#pressure-time-relationship",
+    "href": "chapters/05-burning-rate-and-kn.html#pressure-time-relationship",
+    "title": "6  Burning Rate, Kn Ratio, and Ballistic Performance",
+    "section": "7.4 Pressure-Time Relationship",
+    "text": "7.4 Pressure-Time Relationship\nThe shape of the pressure-time curve is largely determined by how A_b changes with time (i.e., grain geometry):\n\nNeutral burning: A_b roughly constant → flat pressure curve\nProgressive burning: A_b increases → rising pressure\nRegressive burning: A_b decreases → falling pressure",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Burning Rate, Kn Ratio, and Ballistic Performance</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-burning-rate-and-kn.html#simple-ballistic-model-0-d",
+    "href": "chapters/05-burning-rate-and-kn.html#simple-ballistic-model-0-d",
+    "title": "6  Burning Rate, Kn Ratio, and Ballistic Performance",
+    "section": "7.5 Simple Ballistic Model (0-D)",
+    "text": "7.5 Simple Ballistic Model (0-D)\nIn the simplest model, we assume:\n\nUniform pressure and temperature in the chamber\nBurning rate follows Saint-Robert’s law\nMass generation = mass expulsion at nozzle\n\nThis leads to the differential equation for chamber pressure.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Burning Rate, Kn Ratio, and Ballistic Performance</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-burning-rate-and-kn.html#exercises",
+    "href": "chapters/05-burning-rate-and-kn.html#exercises",
+    "title": "6  Burning Rate, Kn Ratio, and Ballistic Performance",
+    "section": "7.6 Exercises",
+    "text": "7.6 Exercises\n\nGiven a = 0.005 mm/s/MPa^n, n = 0.4, calculate burning rate at 5 MPa and at 10 MPa.\nIf a motor has A_b = 500 cm² and A_t = 5 cm², what is Kn?\nExplain why a high n value (&gt;0.7) makes a motor unstable.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Burning Rate, Kn Ratio, and Ballistic Performance</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-burning-rate-and-kn.html#key-takeaways",
+    "href": "chapters/05-burning-rate-and-kn.html#key-takeaways",
+    "title": "6  Burning Rate, Kn Ratio, and Ballistic Performance",
+    "section": "7.7 Key Takeaways",
+    "text": "7.7 Key Takeaways\n\nBurning rate is pressure-dependent (r = a P^n)\nKn ratio (A_b / A_t) is the primary design lever for controlling chamber pressure\nGrain geometry controls how Kn evolves during the burn → controls pressure and thrust profile\nUnderstanding Kn is essential before moving to full internal ballistics simulations\n\nNext Chapter: Erosive Burning, Dynamic Burning, and Transient Effects",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Burning Rate, Kn Ratio, and Ballistic Performance</span>"
+    ]
   }
 ]

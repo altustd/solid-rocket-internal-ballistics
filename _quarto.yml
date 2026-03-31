@@ -1,14 +1,24 @@
 project:
   type: book
-  output-dir: docs
+  output-dir: _book     # Standard for books (your current _site is for websites)
 
 book:
-  title: "Solid Propellant Rocket Motors: Internal Ballistics"
+  title: "Solid Rocket Internal Ballistics"
   author: "Troy Altus"
-  date: today
+  date: "2026"
   chapters:
-    - index.qmd
+    - index.qmd           # ← You probably need this (see below)
     - chapters/01-intro.qmd
     - chapters/02-propellants.qmd
     - chapters/03-grain-design.qmd
     - chapters/04-internal-ballistics.qmd
+    - chapters/05-burning-rate-and-kn.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+  pdf:
+    documentclass: scrreprt
+    number-sections: true

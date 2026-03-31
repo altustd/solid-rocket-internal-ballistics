@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Solid Propellants – Solid Propellant Rocket Motors: Internal Ballistics</title>
+<title>6&nbsp; Burning Rate, Kn Ratio, and Ballistic Performance – Solid Propellant Rocket Motors: Internal Ballistics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/03-grain-design.html" rel="next">
-<link href="../chapters/01-intro.html" rel="prev">
+<link href="../chapters/04-internal-ballistics.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -114,7 +113,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/02-propellants.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Solid Propellants</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05-burning-rate-and-kn.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Burning Rate, Kn Ratio, and Ballistic Performance</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,7 +152,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/02-propellants.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/02-propellants.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Solid Propellants</span></span></a>
   </div>
 </li>
@@ -171,7 +170,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/05-burning-rate-and-kn.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/05-burning-rate-and-kn.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Burning Rate, Kn Ratio, and Ballistic Performance</span></span></a>
   </div>
 </li>
@@ -185,17 +184,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
-  <li><a href="#classification-of-solid-propellants" id="toc-classification-of-solid-propellants" class="nav-link" data-scroll-target="#classification-of-solid-propellants"><span class="header-section-number">3.2</span> Classification of Solid Propellants</a>
+  <li><a href="#burning-rate-kn-ratio-and-ballistic-performance" id="toc-burning-rate-kn-ratio-and-ballistic-performance" class="nav-link active" data-scroll-target="#burning-rate-kn-ratio-and-ballistic-performance"><span class="header-section-number">7</span> Burning Rate, Kn Ratio, and Ballistic Performance</a>
   <ul class="collapse">
-  <li><a href="#double-base-propellants" id="toc-double-base-propellants" class="nav-link" data-scroll-target="#double-base-propellants"><span class="header-section-number">3.2.1</span> Double-Base Propellants</a></li>
-  <li><a href="#composite-propellants" id="toc-composite-propellants" class="nav-link" data-scroll-target="#composite-propellants"><span class="header-section-number">3.2.2</span> Composite Propellants</a></li>
-  <li><a href="#composite-modified-double-base-cmdb" id="toc-composite-modified-double-base-cmdb" class="nav-link" data-scroll-target="#composite-modified-double-base-cmdb"><span class="header-section-number">3.2.3</span> Composite Modified Double-Base (CMDB)</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
+  <li><a href="#burning-rate-fundamentals" id="toc-burning-rate-fundamentals" class="nav-link" data-scroll-target="#burning-rate-fundamentals"><span class="header-section-number">7.2</span> Burning Rate Fundamentals</a>
+  <ul class="collapse">
+  <li><a href="#saint-roberts-law-vieilles-law" id="toc-saint-roberts-law-vieilles-law" class="nav-link" data-scroll-target="#saint-roberts-law-vieilles-law"><span class="header-section-number">7.2.1</span> Saint-Robert’s Law (Vieille’s Law)</a></li>
   </ul></li>
-  <li><a href="#key-ingredients" id="toc-key-ingredients" class="nav-link" data-scroll-target="#key-ingredients"><span class="header-section-number">3.3</span> Key Ingredients</a></li>
-  <li><a href="#important-properties" id="toc-important-properties" class="nav-link" data-scroll-target="#important-properties"><span class="header-section-number">3.4</span> Important Properties</a></li>
-  <li><a href="#burning-rate-law-vieilles-saint-roberts-law" id="toc-burning-rate-law-vieilles-saint-roberts-law" class="nav-link" data-scroll-target="#burning-rate-law-vieilles-saint-roberts-law"><span class="header-section-number">3.5</span> Burning Rate Law (Vieille’s / Saint-Robert’s Law)</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">3.6</span> Next Steps</a></li>
+  <li><a href="#the-kn-ratio" id="toc-the-kn-ratio" class="nav-link" data-scroll-target="#the-kn-ratio"><span class="header-section-number">7.3</span> The Kn Ratio</a></li>
+  <li><a href="#pressure-time-relationship" id="toc-pressure-time-relationship" class="nav-link" data-scroll-target="#pressure-time-relationship"><span class="header-section-number">7.4</span> Pressure-Time Relationship</a></li>
+  <li><a href="#simple-ballistic-model-0-d" id="toc-simple-ballistic-model-0-d" class="nav-link" data-scroll-target="#simple-ballistic-model-0-d"><span class="header-section-number">7.5</span> Simple Ballistic Model (0-D)</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.6</span> Exercises</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">7.7</span> Key Takeaways</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -204,7 +205,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Solid Propellants</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Burning Rate, Kn Ratio, and Ballistic Performance</span></h1>
 </div>
 
 
@@ -221,67 +222,94 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
-<p>Solid propellants are energetic materials that contain both fuel and oxidizer in a solid matrix. They are the heart of solid rocket motors, providing the chemical energy converted into thrust.</p>
-</section>
-<section id="classification-of-solid-propellants" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="classification-of-solid-propellants"><span class="header-section-number">3.2</span> Classification of Solid Propellants</h2>
-<section id="double-base-propellants" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="double-base-propellants"><span class="header-section-number">3.2.1</span> Double-Base Propellants</h3>
+<section id="burning-rate-kn-ratio-and-ballistic-performance" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Burning Rate, Kn Ratio, and Ballistic Performance</h1>
+<section id="learning-objectives" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</h2>
 <ul>
-<li>Composed primarily of nitrocellulose and nitroglycerin</li>
-<li>Homogeneous (uniform composition)</li>
-<li>Common in older tactical missiles</li>
+<li>Understand the difference between strand burning rate and motor burning rate</li>
+<li>Learn the Saint-Robert’s burning rate law (<code>r = a P^n</code>)</li>
+<li>Define and calculate the <strong>Kn ratio</strong> (<code>Kn = A_b / A_t</code>)</li>
+<li>Understand how Kn controls chamber pressure</li>
+<li>Predict basic pressure-time and thrust-time curves</li>
 </ul>
 </section>
-<section id="composite-propellants" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="composite-propellants"><span class="header-section-number">3.2.2</span> Composite Propellants</h3>
+<section id="burning-rate-fundamentals" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="burning-rate-fundamentals"><span class="header-section-number">7.2</span> Burning Rate Fundamentals</h2>
+<p>The burning rate (<code>r_b</code>) is the speed at which the propellant surface regresses.</p>
+<p>In strand burners (Crawford bomb), we measure burning rate under controlled pressure.</p>
+<p>In actual motors, the burning rate is influenced by:</p>
 <ul>
-<li>Most widely used today</li>
-<li>Heterogeneous: oxidizer crystals (usually AP — ammonium perchlorate) suspended in a fuel binder (HTPB, PBAN, etc.)</li>
-<li>Higher performance and better mechanical properties</li>
+<li>Chamber pressure (<code>P_c</code>)</li>
+<li>Propellant initial temperature</li>
+<li>Erosive burning (high gas flow velocity)</li>
+<li>Dynamic burning (transient effects)</li>
 </ul>
-</section>
-<section id="composite-modified-double-base-cmdb" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="composite-modified-double-base-cmdb"><span class="header-section-number">3.2.3</span> Composite Modified Double-Base (CMDB)</h3>
-<ul>
-<li>Hybrid of the two above</li>
-</ul>
-</section>
-</section>
-<section id="key-ingredients" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="key-ingredients"><span class="header-section-number">3.3</span> Key Ingredients</h2>
-<ul>
-<li><strong>Oxidizer</strong>: Ammonium Perchlorate (AP), Ammonium Nitrate (AN)</li>
-<li><strong>Fuel/Binder</strong>: Hydroxyl-terminated polybutadiene (HTPB), Polybutadiene acrylonitrile (PBAN)</li>
-<li><strong>Metal Fuel</strong>: Aluminum powder (increases specific impulse and density)</li>
-<li><strong>Burn Rate Modifiers</strong>: Iron oxide, copper chromite</li>
-<li><strong>Plasticizers and Curatives</strong></li>
-</ul>
-</section>
-<section id="important-properties" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="important-properties"><span class="header-section-number">3.4</span> Important Properties</h2>
-<ul>
-<li>Burning rate (typically 5–25 mm/s at 70 bar)</li>
-<li>Pressure exponent (<code>n</code> in Saint-Robert’s law: <span class="math inline">\(r = a P^n\)</span>)</li>
-<li>Density</li>
-<li>Mechanical properties (tensile strength, elongation)</li>
-<li>Sensitivity (shock, friction, thermal)</li>
-</ul>
-</section>
-<section id="burning-rate-law-vieilles-saint-roberts-law" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="burning-rate-law-vieilles-saint-roberts-law"><span class="header-section-number">3.5</span> Burning Rate Law (Vieille’s / Saint-Robert’s Law)</h2>
+<section id="saint-roberts-law-vieilles-law" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="saint-roberts-law-vieilles-law"><span class="header-section-number">7.2.1</span> Saint-Robert’s Law (Vieille’s Law)</h3>
 <p><span class="math display">\[
-r = a P^n
+r_b = a \cdot P_c^n
 \]</span></p>
-<p>Where: - <span class="math inline">\(r\)</span> = linear burning rate (mm/s) - <span class="math inline">\(P\)</span> = chamber pressure (bar or MPa) - <span class="math inline">\(a\)</span> = burn rate coefficient (pressure and temperature dependent) - <span class="math inline">\(n\)</span> = pressure exponent (usually 0.2 – 0.7)</p>
+<p>Where: - <code>a</code> = burning rate coefficient - <code>n</code> = pressure exponent (usually 0.2 – 0.7 for stable motors) - <code>P_c</code> = chamber pressure</p>
 </section>
-<section id="next-steps" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="next-steps"><span class="header-section-number">3.6</span> Next Steps</h2>
-<p>In the following chapters we will explore how propellant properties, grain geometry, and nozzle design interact to determine the internal ballistics behavior of a solid rocket motor.</p>
+</section>
+<section id="the-kn-ratio" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="the-kn-ratio"><span class="header-section-number">7.3</span> The Kn Ratio</h2>
+<p>The <strong>Kn ratio</strong> is one of the most important parameters in solid rocket motor design:</p>
+<p><span class="math display">\[
+Kn = \frac{A_b}{A_t}
+\]</span></p>
+<ul>
+<li><code>A_b</code> = instantaneous burning surface area</li>
+<li><code>A_t</code> = nozzle throat area</li>
+</ul>
+<p><strong>Why it matters:</strong></p>
+<p>For steady-state burning, chamber pressure is approximately:</p>
+<p><span class="math display">\[
+P_c \approx \left( \frac{Kn \cdot a \cdot \rho_p \cdot c^*}{1} \right)^{\frac{1}{1-n}}
+\]</span></p>
+<p>(where <code>c*</code> is characteristic velocity)</p>
+<p>Higher Kn → Higher chamber pressure → Higher burning rate → Even higher pressure (positive feedback until equilibrium).</p>
+</section>
+<section id="pressure-time-relationship" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="pressure-time-relationship"><span class="header-section-number">7.4</span> Pressure-Time Relationship</h2>
+<p>The shape of the pressure-time curve is largely determined by how <code>A_b</code> changes with time (i.e., grain geometry):</p>
+<ul>
+<li><strong>Neutral burning</strong>: <code>A_b</code> roughly constant → flat pressure curve</li>
+<li><strong>Progressive burning</strong>: <code>A_b</code> increases → rising pressure</li>
+<li><strong>Regressive burning</strong>: <code>A_b</code> decreases → falling pressure</li>
+</ul>
+</section>
+<section id="simple-ballistic-model-0-d" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="simple-ballistic-model-0-d"><span class="header-section-number">7.5</span> Simple Ballistic Model (0-D)</h2>
+<p>In the simplest model, we assume:</p>
+<ol type="1">
+<li>Uniform pressure and temperature in the chamber</li>
+<li>Burning rate follows Saint-Robert’s law</li>
+<li>Mass generation = mass expulsion at nozzle</li>
+</ol>
+<p>This leads to the differential equation for chamber pressure.</p>
+</section>
+<section id="exercises" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.6</span> Exercises</h2>
+<ol type="1">
+<li><p>Given <code>a = 0.005</code> mm/s/MPa^n, <code>n = 0.4</code>, calculate burning rate at 5 MPa and at 10 MPa.</p></li>
+<li><p>If a motor has <code>A_b = 500</code> cm² and <code>A_t = 5</code> cm², what is Kn?</p></li>
+<li><p>Explain why a high <code>n</code> value (&gt;0.7) makes a motor unstable.</p></li>
+</ol>
+</section>
+<section id="key-takeaways" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">7.7</span> Key Takeaways</h2>
+<ul>
+<li>Burning rate is pressure-dependent (<code>r = a P^n</code>)</li>
+<li>Kn ratio (<code>A_b / A_t</code>) is the primary design lever for controlling chamber pressure</li>
+<li>Grain geometry controls how Kn evolves during the burn → controls pressure and thrust profile</li>
+<li>Understanding Kn is essential before moving to full internal ballistics simulations</li>
+</ul>
+<p><strong>Next Chapter:</strong> Erosive Burning, Dynamic Burning, and Transient Effects</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -687,14 +715,11 @@ r = a P^n
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/01-intro.html" class="pagination-link" aria-label="Introduction to Solid Rocket Internal Ballistics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Solid Rocket Internal Ballistics</span></span>
+      <a href="../chapters/04-internal-ballistics.html" class="pagination-link" aria-label="Internal Ballistics Core">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Internal Ballistics Core</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/03-grain-design.html" class="pagination-link" aria-label="Grain Design and Geometry">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Grain Design and Geometry</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

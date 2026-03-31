@@ -1,0 +1,95 @@
+---
+title: "Burning Rate, Kn Ratio, and Ballistic Performance"
+---
+
+# Burning Rate, Kn Ratio, and Ballistic Performance
+
+## Learning Objectives
+
+- Understand the difference between strand burning rate and motor burning rate
+- Learn the Saint-Robert's burning rate law (`r = a P^n`)
+- Define and calculate the **Kn ratio** (`Kn = A_b / A_t`)
+- Understand how Kn controls chamber pressure
+- Predict basic pressure-time and thrust-time curves
+
+## Burning Rate Fundamentals
+
+The burning rate (`r_b`) is the speed at which the propellant surface regresses.
+
+In strand burners (Crawford bomb), we measure burning rate under controlled pressure.
+
+In actual motors, the burning rate is influenced by:
+
+- Chamber pressure (`P_c`)
+- Propellant initial temperature
+- Erosive burning (high gas flow velocity)
+- Dynamic burning (transient effects)
+
+### Saint-Robert's Law (Vieille's Law)
+
+$$
+r_b = a \cdot P_c^n
+$$
+
+Where:
+- `a` = burning rate coefficient
+- `n` = pressure exponent (usually 0.2 – 0.7 for stable motors)
+- `P_c` = chamber pressure
+
+## The Kn Ratio
+
+The **Kn ratio** is one of the most important parameters in solid rocket motor design:
+
+$$
+Kn = \frac{A_b}{A_t}
+$$
+
+- `A_b` = instantaneous burning surface area
+- `A_t` = nozzle throat area
+
+**Why it matters:**
+
+For steady-state burning, chamber pressure is approximately:
+
+$$
+P_c \approx \left( \frac{Kn \cdot a \cdot \rho_p \cdot c^*}{1} \right)^{\frac{1}{1-n}}
+$$
+
+(where `c*` is characteristic velocity)
+
+Higher Kn → Higher chamber pressure → Higher burning rate → Even higher pressure (positive feedback until equilibrium).
+
+## Pressure-Time Relationship
+
+The shape of the pressure-time curve is largely determined by how `A_b` changes with time (i.e., grain geometry):
+
+- **Neutral burning**: `A_b` roughly constant → flat pressure curve
+- **Progressive burning**: `A_b` increases → rising pressure
+- **Regressive burning**: `A_b` decreases → falling pressure
+
+## Simple Ballistic Model (0-D)
+
+In the simplest model, we assume:
+
+1. Uniform pressure and temperature in the chamber
+2. Burning rate follows Saint-Robert's law
+3. Mass generation = mass expulsion at nozzle
+
+This leads to the differential equation for chamber pressure.
+
+## Exercises
+
+1. Given `a = 0.005` mm/s/MPa^n, `n = 0.4`, calculate burning rate at 5 MPa and at 10 MPa.
+
+2. If a motor has `A_b = 500` cm² and `A_t = 5` cm², what is Kn?
+
+3. Explain why a high `n` value (>0.7) makes a motor unstable.
+
+## Key Takeaways
+
+- Burning rate is pressure-dependent (`r = a P^n`)
+- Kn ratio (`A_b / A_t`) is the primary design lever for controlling chamber pressure
+- Grain geometry controls how Kn evolves during the burn → controls pressure and thrust profile
+- Understanding Kn is essential before moving to full internal ballistics simulations
+
+**Next Chapter:** Erosive Burning, Dynamic Burning, and Transient Effects
