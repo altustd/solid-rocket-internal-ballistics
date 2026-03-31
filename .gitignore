@@ -9,3 +9,6 @@ outputs/
 renv/library/
 .DS_Store
 quarto-preview/
+
+/.quarto/
+**/*.quarto_ipynb
