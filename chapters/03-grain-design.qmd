@@ -1,0 +1,44 @@
+# Grain Design and Geometry
+
+## Introduction
+
+Grain design is one of the most critical aspects of solid rocket motor performance. The shape of the propellant grain controls how the burning surface area evolves over time, which directly determines the thrust profile of the motor.
+
+## Key Concepts
+
+### Web Thickness
+The **web thickness** is the minimum distance the burning surface must regress before the grain is fully consumed.
+
+### Burning Surface Area $A_b(t)$
+The evolution of burning surface area is the core variable in grain design:
+
+$$
+A_b(t) = f(\text{grain geometry}, \text{web distance burned})
+$$
+
+Grain geometries produce three main burning behaviors:
+- **Neutral**: Roughly constant thrust
+- **Progressive**: Thrust increases with time
+- **Regressive**: Thrust decreases with time
+
+## Common Grain Geometries
+
+- Cylindrical (core-burning)
+- Star grains
+- Finocyl (fin-in-cylinder)
+- Wagon wheel / dendrite
+- Conical and tapered grains
+
+## Important Design Parameters
+
+- Kn ratio ($K_n = A_b / A_t$)
+- Volumetric loading fraction
+- Length-to-diameter (L/D) ratio
+- Sliver fraction (unburned propellant at burnout)
+
+## Link to Internal Ballistics
+
+Grain geometry combined with burning rate laws determines the pressure-time curve. A well-designed grain allows engineers to tailor thrust profiles for specific missions.
+
+The next chapter explores the detailed equations of internal ballistics.
+

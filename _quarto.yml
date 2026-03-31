@@ -12,6 +12,7 @@ book:
     - index.qmd
     - chapters/01-intro.qmd
     - chapters/02-propellants.qmd
+    - chapters/03-grain-design.qmd
     - chapters/04-internal-ballistics.qmd
 
 bibliography: references.bib
