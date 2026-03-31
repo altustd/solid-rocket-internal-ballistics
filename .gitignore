@@ -1,0 +1,11 @@
+_book/
+docs/
+outputs/
+*.html
+*.pdf
+*.epub
+.Rhistory
+.RData
+renv/library/
+.DS_Store
+quarto-preview/

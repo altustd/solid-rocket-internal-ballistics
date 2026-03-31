@@ -1,0 +1,22 @@
+# Introduction to Solid Rocket Internal Ballistics
+
+Solid rocket motors are widely used in missiles, launch vehicles, and amateur rocketry due to their simplicity, reliability, and high thrust-to-weight ratio.
+
+## What is Internal Ballistics?
+
+Internal ballistics is the study of the processes occurring **inside** the rocket motor from ignition until burnout. It includes:
+
+- Ignition and flame spreading
+- Propellant combustion
+- Gas generation and pressure buildup
+- Nozzle flow and thrust generation
+
+## Why It Matters
+
+Accurate internal ballistics modeling allows engineers to:
+- Predict pressure-time curves
+- Optimize grain geometry
+- Ensure structural integrity
+- Maximize performance and safety
+
+This book focuses on the theoretical foundations and practical computational methods used in solid rocket motor design.

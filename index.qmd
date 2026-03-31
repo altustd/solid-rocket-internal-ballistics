@@ -1,0 +1,26 @@
+# Solid Propellant Rocket Motors: Internal Ballistics
+
+**Theory, Equations, and Numerical Simulation**
+
+This book provides a comprehensive technical resource on the internal ballistics of solid propellant rocket motors.
+
+## Scope
+
+The material covers:
+- Propellant chemistry and burning rate laws
+- Solid grain geometry and design
+- Chamber pressure prediction and mass balance
+- Thrust curve generation and performance analysis
+- Numerical modeling techniques
+
+## How to Use This Book
+
+- Use the sidebar to navigate chapters
+- Equations are typeset using LaTeX
+- Code examples (when added) can be executed directly
+
+**Work in progress** — New chapters and simulation examples will be added regularly.
+
+::: {.callout-tip}
+Contributions and suggestions are welcome!
+:::

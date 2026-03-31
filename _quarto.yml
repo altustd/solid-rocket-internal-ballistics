@@ -1,0 +1,54 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Solid Propellant Rocket Motors: Internal Ballistics"
+  subtitle: "Theory, Equations, and Numerical Simulation"
+  author: "Troy Altus"
+  date: today
+  repo-url: https://github.com/altustd/solid-rocket-internal-ballistics
+  repo-actions: [edit, issue]
+
+  chapters:
+    - index.qmd
+    - part: "Fundamentals"
+      chapters:
+        - chapters/01-intro.qmd
+        - chapters/02-propellants.qmd
+        - chapters/03-grain-design.qmd
+
+    - part: "Internal Ballistics Core"
+      chapters:
+        - chapters/04-internal-ballistics.qmd
+        - chapters/05-burning-rate.qmd
+        - chapters/06-grain-burnback.qmd
+
+    - part: "Advanced Topics"
+      chapters:
+        - chapters/07-transients-stability.qmd
+        - chapters/08-numerical-modeling.qmd
+        - chapters/09-applications-examples.qmd
+
+  appendices:
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    css: styles/styles.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-tools: true
+    smooth-scroll: true
+    code-fold: show
+
+  pdf:
+    documentclass: scrbook
+    papersize: letter
+    toc: true
+    number-sections: true
+    fig-cap-location: bottom
