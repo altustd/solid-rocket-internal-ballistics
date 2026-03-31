@@ -12,12 +12,12 @@ This ebook explores propellant chemistry, grain geometry, burning surface evolut
 
 ### Current Chapters
 
-- [Introduction](https://altustd.github.io/solid-rocket-internal-ballistics/introduction.html)
-- [Solid Propellants](https://altustd.github.io/solid-rocket-internal-ballistics/solid-propellants.html)
-- [Grain Design and Geometry](https://altustd.github.io/solid-rocket-internal-ballistics/grain-design-and-geometry.html)
-- [Internal Ballistics Core](https://altustd.github.io/solid-rocket-internal-ballistics/internal-ballistics-core.html)
+- **[Introduction](https://altustd.github.io/solid-rocket-internal-ballistics/01-intro.html)**
+- **[Solid Propellants](https://altustd.github.io/solid-rocket-internal-ballistics/02-propellants.html)**
+- **[Grain Design and Geometry](https://altustd.github.io/solid-rocket-internal-ballistics/03-grain-design.html)**
+- **[Internal Ballistics Core](https://altustd.github.io/solid-rocket-internal-ballistics/04-internal-ballistics.html)**
 
-More chapters are actively being developed.
+More chapters are in active development.
 
 ---
 
@@ -33,14 +33,7 @@ More chapters are actively being developed.
 ## How to Run Locally
 
 ```bash
-# Clone the repository
 git clone https://github.com/altustd/solid-rocket-internal-ballistics.git
-
-# Navigate into the folder
 cd solid-rocket-internal-ballistics
-
-# Render the book
 quarto render
-
-# Preview locally (optional)
 quarto preview

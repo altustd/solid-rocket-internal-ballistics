@@ -1,34 +1,13 @@
 project:
   type: book
-  output-dir: _book
 
 book:
   title: "Solid Propellant Rocket Motors: Internal Ballistics"
-  subtitle: "Theory ⋅ Equations ⋅ Numerical Simulation"
   author: "Troy Altus"
   date: today
-
   chapters:
     - index.qmd
     - chapters/01-intro.qmd
     - chapters/02-propellants.qmd
     - chapters/03-grain-design.qmd
     - chapters/04-internal-ballistics.qmd
-
-bibliography: references.bib
-
-format:
-  html:
-    theme: cosmo
-    css: styles/styles.css
-    toc: true
-    toc-depth: 3
-    number-sections: true
-    code-tools: true
-    smooth-scroll: true
-
-  pdf:
-    documentclass: scrbook
-    papersize: letter
-    toc: true
-    number-sections: true
