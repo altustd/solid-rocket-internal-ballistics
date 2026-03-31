@@ -1,9 +1,34 @@
 ---
-title: "Burning Rate, Kn Ratio, and Ballistic Performance"
+# Leave this empty or add only other options like author/date if needed
 ---
 
 # Burning Rate, Kn Ratio, and Ballistic Performance
+project:
+  type: book
+  output-dir: _book
 
+book:
+  title: "Solid Propellant Rocket Motors: Internal Ballistics"
+  author: "Troy Altus"
+  date: today
+  chapters:
+    - index.qmd
+    - chapters/01-intro.qmd
+    - chapters/02-propellants.qmd
+    - chapters/03-grain-design.qmd
+    - chapters/04-internal-ballistics.qmd
+    - chapters/05-burning-rate-and-kn.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    number-depth: 3
+  pdf:
+    documentclass: scrreprt
+    number-sections: true
+    number-depth: 3
 ## Learning Objectives
 
 - Understand the difference between strand burning rate and motor burning rate

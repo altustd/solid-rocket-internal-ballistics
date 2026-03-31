@@ -1,52 +1,11 @@
 ---
 title: "Solid Propellant Rocket Motors: Internal Ballistics"
-subtitle: "Theory ⋅ Equations ⋅ Numerical Simulation"
-author: "Troy Altus"
-date: today
 ---
 
-# Welcome
+# Preface {.unnumbered}
 
-This book presents a technical deep-dive into the **internal ballistics** of solid propellant rocket motors — from fundamental combustion physics to practical design and simulation methods.
+This book covers the internal ballistics of solid propellant rocket motors.
 
-## What This Book Covers
-
-**Fundamentals**
-- Propellant chemistry and combustion
-- Burning rate laws and scaling effects
-- Solid grain geometry and design principles
-
-**Core Internal Ballistics**
-- Chamber pressure prediction
-- Mass generation and flow balance
-- Thrust curve generation
-- Specific impulse and performance metrics
-
-**Advanced Topics**
-- Transient behavior and ignition
-- Erosive burning and stability
-- Numerical modeling techniques
-
-## Who This Book Is For
-
-- Amateur and experimental rocketeers
-- Aerospace engineering students
-- Hobbyists building solid rocket motors
-- Anyone interested in the science behind solid propulsion
-
-## How to Use This Book
-
-- Navigate using the sidebar
-- Equations are rendered with LaTeX
-- Code examples (when added) can be executed interactively
-- All chapters are designed to build progressively
-
-::: {.callout-tip}
-This is a living document. New chapters, examples, and simulation code will be added regularly.
+:::{.callout-tip}
+Work in progress.
 :::
-
-**Feedback and contributions are welcome.**
-
----
-
-**Last updated:** `r format(Sys.Date(), "%B %Y")`

@@ -1,13 +1,13 @@
 project:
   type: book
-  output-dir: _book     # Standard for books (your current _site is for websites)
+  output-dir: _book
 
 book:
-  title: "Solid Rocket Internal Ballistics"
+  title: "Solid Propellant Rocket Motors: Internal Ballistics"
   author: "Troy Altus"
-  date: "2026"
+  date: today
   chapters:
-    - index.qmd           # ← You probably need this (see below)
+    - index.qmd
     - chapters/01-intro.qmd
     - chapters/02-propellants.qmd
     - chapters/03-grain-design.qmd
@@ -19,6 +19,8 @@ format:
     theme: cosmo
     toc: true
     number-sections: true
+    number-depth: 3
   pdf:
     documentclass: scrreprt
     number-sections: true
+    number-depth: 3
