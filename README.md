@@ -4,8 +4,12 @@ An open technical resource covering the internal ballistics of solid propellant 
 
 ## Read the Book
 
+**Online Version (GitHub Pages):**
+https://altustd.github.io/solid-rocket-internal-ballistics/
+
 **Local Version:**
-After cloning the repo, run:
 ```bash
+git clone https://github.com/altustd/solid-rocket-internal-ballistics.git
+cd solid-rocket-internal-ballistics
 quarto render
 open _book/index.html
