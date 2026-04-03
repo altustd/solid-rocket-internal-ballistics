@@ -1,19 +1,38 @@
-# Solid Propellant Rocket Motors: Internal Ballistics
+# Solid Rocket Internal Ballistics
 
-An open technical resource covering the **internal ballistics** of solid propellant rocket motors (SRMs).
+**A comprehensive theory and simulation guide to solid rocket motor internal ballistics.**
+
+This repository focuses on the fundamental physics, mathematical modeling, and numerical simulation of what happens inside a solid rocket motor during combustion — from ignition to burnout.
+
+It serves as the **theory companion** to the optimization-focused project:
+**[opt-solid-rocket](https://github.com/altustd/opt-solid-rocket)**
 
 ---
 
-## 📖 Read the Book
+## What This Book Covers
 
-**👉 [Open the Full Ebook Online](https://altustd.github.io/solid-rocket-internal-ballistics/)** (Recommended)
+- Propellant chemistry and burn rate laws
+- Zero-dimensional and quasi-1D internal ballistics models
+- Chamber pressure and thrust-time curve prediction
+- Burn surface regression for complex grain geometries
+- Erosive burning, temperature sensitivity, and pressure exponent effects
+- Ignition transients and pressure spikes
+- Numerical integration methods for ballistic simulation
+- Detailed derivations and Python implementations
 
 ---
 
-## How to Run Locally
+## Project Structure
 
 ```bash
-git clone https://github.com/altustd/solid-rocket-internal-ballistics.git
-cd solid-rocket-internal-ballistics
-quarto render
-quarto preview
+solid-rocket-internal-ballistics/
+├── index.qmd
+├── _quarto.yml
+├── chapters/          # Theory and simulation chapters
+├── appendices/
+├── code/              # Reusable Python simulation modules
+├── data/              # Propellant properties and test data
+├── figures/
+├── _book/             # Rendered output (ignored)
+├── requirements.txt
+└── README.md
