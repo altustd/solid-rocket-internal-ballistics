@@ -4,7 +4,7 @@ project:
 
 book:
   title: "Solid Rocket Internal Ballistics"
-  subtitle: "Theory, Modeling, and Simulation"
+  subtitle: "Theory ⋅ Equations ⋅ Numerical Simulation"
   author: "Troy Altus"
   date: today
   repo-url: https://github.com/altustd/solid-rocket-internal-ballistics
@@ -16,18 +16,19 @@ book:
     - chapters/01-intro.qmd
     - chapters/02-propellants.qmd
     - chapters/03-grain-design.qmd
-    - chapters/04-internal-ballistics.qmd
     - chapters/04-burnback-simulation.qmd
-    - chapters/05-burning-rate-and-kn.qmd
-    - chapters/05-erosive-burning.qmd
-    - chapters/06-performance-modeling.qmd
-    - chapters/06-ignition-transient.qmd
-    - chapters/07-full-simulation.qmd
+    - chapters/05-internal-ballistics.qmd
+    - chapters/06-burning-rate-and-kn.qmd
+    - chapters/07-erosive-burning.qmd
+    - chapters/08-performance-modeling.qmd
+    - chapters/09-ignition-transient.qmd
+    - chapters/10-full-simulation.qmd
 
   appendices:
     - appendices/a-derivations.qmd
     - appendices/b-propellant-database.qmd
     - appendices/c-python-modules.qmd
+    - appendices/d-numerical-methods.qmd
 
 format:
   html:
@@ -36,10 +37,22 @@ format:
     number-sections: true
     toc: true
     toc-depth: 3
+    smooth-scroll: true
+
   pdf:
     documentclass: scrreprt
     number-sections: true
     toc: true
+    latex-engine: pdflatex
+
+# Force Quarto to use the correct Python kernel (this fixes most render failures)
+jupyter: python3
+
+execute:
+  echo: false          # Hide all code by default (clean textbook style)
+  warning: false
+  message: false
+  cache: true          # Speeds up repeated renders
 
 crossref:
   chapters: true

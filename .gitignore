@@ -1,11 +1,55 @@
+# Quarto build outputs
 _book/
+docs/
+.quarto/
+quarto-preview/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Virtual environments
+requirements.txt  # keep this one (it's source control friendly)
+
+# Data and outputs
 outputs/
+data/*.csv
+data/*.json
+*.log
+
+# Figures and temporary files
+figures/*.png
+figures/*.jpg
+figures/*.pdf
+*.DS_Store
+Thumbs.db
+
+# PDF / EPUB outputs
 *.pdf
 *.epub
-.Rhistory
-.RData
-renv/library/
+
+# Editor / IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Repomix & temporary files
+repomix-output.*
+project_tree.txt   # optional - regenerate when needed
+
+# macOS specific
 .DS_Store
-quarto-preview/
+
 /.quarto/
 **/*.quarto_ipynb

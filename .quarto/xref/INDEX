@@ -43,5 +43,26 @@
   },
   "appendices/c-python-modules.qmd": {
     "c-python-modules.html": "cd9f901b"
+  },
+  "chapters/05-internal-ballistics.qmd": {
+    "05-internal-ballistics.html": "748d1033"
+  },
+  "chapters/09-ignition-transient.qmd": {
+    "09-ignition-transient.html": "c461abb4"
+  },
+  "chapters/07-erosive-burning.qmd": {
+    "07-erosive-burning.html": "d735e7b1"
+  },
+  "chapters/10-full-simulation.qmd": {
+    "10-full-simulation.html": "99fa68ad"
+  },
+  "chapters/08-performance-modeling.qmd": {
+    "08-performance-modeling.html": "8775a60a"
+  },
+  "chapters/06-burning-rate-and-kn.qmd": {
+    "06-burning-rate-and-kn.html": "126b8c1e"
+  },
+  "appendices/d-numerical-methods.qmd": {
+    "d-numerical-methods.html": "085e7bfc"
   }
 }

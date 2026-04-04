@@ -2,70 +2,87 @@
 title: "Burn Surface Regression and Grain Burnback"
 ---
 
-# Chapter 4: Burn Surface Regression and Grain Burnback Simulation
+# Burn Surface Regression and Grain Burnback Simulation
 
 ## Why Burnback Simulation Matters
 
-The propellant grain geometry determines how the burn surface evolves over time. Accurate modeling of this **burnback** (or burn surface regression) is essential for predicting realistic pressure-time and thrust-time curves.
+The propellant grain geometry determines how the burning surface evolves over time. Accurate modeling of this **burnback** (surface regression) is essential for predicting realistic chamber pressure-time ($P$-$t$) and thrust-time curves.
 
-Simple analytical models work for basic shapes (cylinders, end-burners), but real rocket motors often use complex geometries (star, finocyl, wagon-wheel, etc.) that require numerical burnback simulation.
+Simple analytical models work well for basic shapes such as cylindrical core burners or end-burners. However, modern rocket motors often use complex geometries — star, finocyl, wagon-wheel, dendrite, or slotted grains — that require numerical burnback simulation.
 
 ## Core Concept: Web Distance
 
-As the propellant burns, the burning surface moves **inward** perpendicular to itself by a distance called the **web** ($w$).
+As the propellant burns, the burning surface moves **inward**, perpendicular to itself, by a distance called the **web** ($w$).  
 
-The instantaneous burn area $A_b(w)$ is a function of the web distance burned.
+The instantaneous burning surface area $A_b$ is a function of the web distance burned:
 
 $$
-A_b(w) = f(\text{initial geometry}, w)
+A_b(w) = f(\text{initial grain geometry}, w)
 $$
 
-When the web reaches the maximum web thickness, the grain is fully consumed (burnout).
+Burnout occurs when the web distance $w$ reaches the maximum web thickness of the grain.
 
-## Burnback Methods
+## Burnback Modeling Approaches
 
 ### 1. Analytical Methods (Fast but Limited)
-- Cylinder (internal or external burning)
-- End-burner
-- Simple conical grains
+
+Suitable for simple geometries:
+
+- Internal-burning cylinder
+- External-burning cylinder
+- End-burner (cigarette grain)
+- Simple conical or tapered grains
+
+These use closed-form equations but break down quickly for complex ports.
 
 ### 2. Numerical / Geometric Burnback (General Purpose)
-- Minimum Distance Function (MDF) method
-- Level-set methods
-- Voxel-based or mesh-based regression
-- Ray marching techniques
 
-For most amateur and small-motor designs, a **2D or simplified 3D geometric approach** is sufficient and computationally efficient.
+For arbitrary grain shapes, the standard techniques are:
 
-## Pseudocode: Basic Burnback Simulation
+- **Minimum Distance Function (MDF)** method
+- **Level-set** methods
+- Polygon offsetting (using libraries such as `shapely` in Python)
+- Voxel-based or grid-based regression
+- CAD-based parametric slicing
 
-```python
-# Pseudocode: Grain Burnback Simulation
-function simulate_burnback(grain, dt, max_time):
+For most amateur, experimental, and small-motor work, a **2D cross-sectional + axial slicing** approach (Ballistic Element Analysis) offers an excellent balance of accuracy and speed.
 
-    web = 0.0
-    time = 0.0
-    results = []
+## How Ballistic Element Analysis Works
 
-    while web < grain.max_web_thickness and time < max_time:
-        
-        # Calculate current burn area at current web distance
-        Ab = grain.calculate_burn_area(web)
-        
-        # Get local burn rate (can include pressure and erosive effects)
-        r_b = burn_rate(P_current, T_propellant)
-        
-        # Advance the web
-        web += r_b * dt
-        time += dt
-        
-        # Calculate instantaneous performance
-        m_dot_gen = rho_propellant * Ab * r_b
-        thrust = calculate_thrust(P_current, Ab)
-        
-        store_result(time, web, Ab, P_current, thrust)
-        
-        # Update pressure from ballistic solver (coupled)
-        P_current = update_chamber_pressure(m_dot_gen)
+1. Slice the grain into many thin axial elements of thickness $\Delta x$.
+2. For each slice, compute the 2-D burning perimeter $P_b(w)$ as a function of web distance.
+3. Sum the contributions:
 
-    return results
+$$
+A_b(w) = \sum_{i=1}^{N} P_{b,i}(w) \cdot \Delta x
+$$
+
+4. Simultaneously track the free chamber volume $V_c(w)$ by subtracting burned propellant volume.
+
+This produces high-resolution tables of $A_b(w)$ and $V_c(w)$ that are fed directly into the 0D lumped-parameter ballistic solver.
+
+## Pseudocode: Basic Burnback + Ballistic Coupling
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Example of burning surface area evolution during grain burnback"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Simple example: progressive-neutral-regressive grain
+web = np.linspace(0, 0.030, 200)
+Ab = 0.045 + 0.8 * web - 35 * web**2   # quadratic approximation
+
+plt.figure(figsize=(8, 5))
+plt.plot(web * 1000, Ab, 'b-', linewidth=2)
+plt.xlabel('Web Distance Burned (mm)')
+plt.ylabel(r'Burning Surface Area $A_b$ (m²)')   # Fixed: use raw string + single $
+plt.title('Example Burning Surface Area vs. Web Distance')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+

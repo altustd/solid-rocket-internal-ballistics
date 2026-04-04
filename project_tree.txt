@@ -1,0 +1,121 @@
+.
+├── _book
+│   ├── appendices
+│   │   ├── a-derivations.html
+│   │   ├── b-propellant-database.html
+│   │   └── c-python-modules.html
+│   ├── chapters
+│   │   ├── 06-performance-modeling_files
+│   │   │   ├── figure-html
+│   │   │   │   └── cell-2-output-1.png
+│   │   │   └── figure-pdf
+│   │   │       └── cell-2-output-1.pdf
+│   │   ├── 00-preface.html
+│   │   ├── 01-intro.html
+│   │   ├── 02-propellants.html
+│   │   ├── 03-grain-design.html
+│   │   ├── 04-burnback-simulation.html
+│   │   ├── 04-internal-ballistics.html
+│   │   ├── 05-burning-rate-and-kn.html
+│   │   ├── 05-erosive-burning.html
+│   │   ├── 06-ignition-transient.html
+│   │   ├── 06-performance-modeling.html
+│   │   └── 07-full-simulation.html
+│   ├── site_libs
+│   │   ├── bootstrap
+│   │   │   ├── bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css
+│   │   │   ├── bootstrap-icons.css
+│   │   │   ├── bootstrap-icons.woff
+│   │   │   └── bootstrap.min.js
+│   │   ├── clipboard
+│   │   │   └── clipboard.min.js
+│   │   ├── quarto-html
+│   │   │   ├── tabsets
+│   │   │   │   └── tabsets.js
+│   │   │   ├── anchor.min.js
+│   │   │   ├── popper.min.js
+│   │   │   ├── quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css
+│   │   │   ├── quarto.js
+│   │   │   ├── tippy.css
+│   │   │   └── tippy.umd.min.js
+│   │   ├── quarto-nav
+│   │   │   ├── headroom.min.js
+│   │   │   └── quarto-nav.js
+│   │   └── quarto-search
+│   │       ├── autocomplete.umd.js
+│   │       ├── fuse.min.js
+│   │       └── quarto-search.js
+│   ├── Solid-Rocket-Internal-Ballistics.pdf
+│   ├── index.html
+│   ├── search.json
+│   └── styles.css
+├── appendices
+│   ├── a-derivations.qmd
+│   ├── b-propellant-database.qmd
+│   ├── c-python-modules.qmd
+│   └── d-numerical-methods.qmd
+├── chapters
+│   ├── 00-preface.qmd
+│   ├── 01-intro.qmd
+│   ├── 02-propellants.qmd
+│   ├── 03-grain-design.qmd
+│   ├── 04-burnback-simulation.qmd
+│   ├── 04-internal-ballistics.qmd
+│   ├── 05-burning-rate-and-kn.qmd
+│   ├── 05-erosive-burning.qmd
+│   ├── 06-ignition-transient.qmd
+│   ├── 06-performance-modeling.qmd
+│   ├── 07-full-simulation.qmd
+│   ├── Preface.qmd
+│   ├── _06-performance-modeling.qmd
+│   ├── hide-python.md
+│   └── hide-python.qmd
+├── code
+├── data
+├── docs
+│   ├── chapters
+│   │   ├── 01-intro.html
+│   │   ├── 02-propellants.html
+│   │   ├── 03-grain-design.html
+│   │   ├── 04-internal-ballistics.html
+│   │   └── 05-burning-rate-and-kn.html
+│   ├── site_libs
+│   │   ├── bootstrap
+│   │   │   ├── bootstrap-87aed0b8589e23e45aa8556edf37a91b.min.css
+│   │   │   ├── bootstrap-icons.css
+│   │   │   ├── bootstrap-icons.woff
+│   │   │   └── bootstrap.min.js
+│   │   ├── clipboard
+│   │   │   └── clipboard.min.js
+│   │   ├── quarto-html
+│   │   │   ├── tabsets
+│   │   │   │   └── tabsets.js
+│   │   │   ├── anchor.min.js
+│   │   │   ├── popper.min.js
+│   │   │   ├── quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css
+│   │   │   ├── quarto.js
+│   │   │   ├── tippy.css
+│   │   │   └── tippy.umd.min.js
+│   │   ├── quarto-nav
+│   │   │   ├── headroom.min.js
+│   │   │   └── quarto-nav.js
+│   │   └── quarto-search
+│   │       ├── autocomplete.umd.js
+│   │       ├── fuse.min.js
+│   │       └── quarto-search.js
+│   ├── index.html
+│   └── search.json
+├── figures
+├── outputs
+├── scripts
+├── styles
+│   └── styles.css
+├── README.md
+├── _quarto.yml
+├── index.qmd
+├── project_tree.txt
+├── references.bib
+├── requirements.txt
+└── styles.css
+
+31 directories, 88 files
