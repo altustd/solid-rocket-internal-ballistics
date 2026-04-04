@@ -5,22 +5,22 @@ project:
 book:
   title: "Solid Propellant Rocket Motors: Internal Ballistics"
   author: "Troy Altus"
-  date: today
+  date: April 1, 2026 (seriously)
   chapters:
     - index.qmd
+    - chapters/00-preface.qmd
     - chapters/01-intro.qmd
     - chapters/02-propellants.qmd
     - chapters/03-grain-design.qmd
     - chapters/04-internal-ballistics.qmd
     - chapters/05-burning-rate-and-kn.qmd
+    - chapters/_06-performance-modeling.qmd
+    #- chapters/hide-python.qmd
 
 format:
   html:
     theme: cosmo
-    toc: true
     number-sections: true
-    number-depth: 3
   pdf:
-    documentclass: scrreprt
+    documentclass: scrbook    # Good for books, supports chapters well
     number-sections: true
-    number-depth: 3

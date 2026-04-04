@@ -1,11 +1,6 @@
----
-title: "Solid Propellant Rocket Motors: Internal Ballistics"
----
+# {.unnumbered .unlisted} 
+<!--Solid Propellant Rocket Motors: Internal Ballistics {.unnumbered .unlisted}     --> 
+<!-- Optional: short subtitle or welcome text -->
+This ebook covers the internal ballistics of solid propellant rocket motors, with emphasis on performance modeling, grain design, and static test anchoring.
 
-# Preface {.unnumbered}
-
-This book covers the internal ballistics of solid propellant rocket motors.
-
-:::{.callout-tip}
-Work in progress.
-:::
+<!-- Cover image here if desired -->

@@ -1,0 +1,4 @@
+# Preface {.unnumbered}
+
+This book covers the internal ballistics of solid propellant rocket motors...
+

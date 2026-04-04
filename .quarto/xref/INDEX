@@ -16,5 +16,17 @@
   },
   "chapters/05-burning-rate-and-kn.qmd": {
     "05-burning-rate-and-kn.html": "9c55f7e7"
+  },
+  "chapters/06-performance-modeling.qmd": {
+    "06-performance-modeling.html": "5ea3943f"
+  },
+  "chapters/00-preface.qmd": {
+    "00-preface.html": "bd4b141e"
+  },
+  "chapters/hide-python.qmd": {
+    "hide-python.html": "79bd219b"
+  },
+  "chapters/_06-performance-modeling.qmd": {
+    "_06-performance-modeling.html": "71a10602"
   }
 }

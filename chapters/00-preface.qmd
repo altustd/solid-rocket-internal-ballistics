@@ -1,0 +1,6 @@
+# Preface {.unnumbered .unlisted}
+
+Welcome to this ebook on solid rocket internal ballistics.  This book is intended for students, engineers, and hobbyists interested in understanding the fundamental principles governing the performance of solid propellant rocket motors.  We will cover the key concepts of burning rate, Kn ratio, grain design, and performance modeling, with a focus on practical applications and computational methods.  Whether you are designing your first motor or looking to deepen your understanding of internal ballistics, this book will provide a solid foundation and guide you through the complexities of solid rocket motor behavior.  Let's get started!  
+
+
+
