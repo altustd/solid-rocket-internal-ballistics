@@ -1,0 +1,71 @@
+---
+title: "Burn Surface Regression and Grain Burnback"
+---
+
+# Chapter 4: Burn Surface Regression and Grain Burnback Simulation
+
+## Why Burnback Simulation Matters
+
+The propellant grain geometry determines how the burn surface evolves over time. Accurate modeling of this **burnback** (or burn surface regression) is essential for predicting realistic pressure-time and thrust-time curves.
+
+Simple analytical models work for basic shapes (cylinders, end-burners), but real rocket motors often use complex geometries (star, finocyl, wagon-wheel, etc.) that require numerical burnback simulation.
+
+## Core Concept: Web Distance
+
+As the propellant burns, the burning surface moves **inward** perpendicular to itself by a distance called the **web** ($w$).
+
+The instantaneous burn area $A_b(w)$ is a function of the web distance burned.
+
+$$
+A_b(w) = f(\text{initial geometry}, w)
+$$
+
+When the web reaches the maximum web thickness, the grain is fully consumed (burnout).
+
+## Burnback Methods
+
+### 1. Analytical Methods (Fast but Limited)
+- Cylinder (internal or external burning)
+- End-burner
+- Simple conical grains
+
+### 2. Numerical / Geometric Burnback (General Purpose)
+- Minimum Distance Function (MDF) method
+- Level-set methods
+- Voxel-based or mesh-based regression
+- Ray marching techniques
+
+For most amateur and small-motor designs, a **2D or simplified 3D geometric approach** is sufficient and computationally efficient.
+
+## Pseudocode: Basic Burnback Simulation
+
+```python
+# Pseudocode: Grain Burnback Simulation
+function simulate_burnback(grain, dt, max_time):
+
+    web = 0.0
+    time = 0.0
+    results = []
+
+    while web < grain.max_web_thickness and time < max_time:
+        
+        # Calculate current burn area at current web distance
+        Ab = grain.calculate_burn_area(web)
+        
+        # Get local burn rate (can include pressure and erosive effects)
+        r_b = burn_rate(P_current, T_propellant)
+        
+        # Advance the web
+        web += r_b * dt
+        time += dt
+        
+        # Calculate instantaneous performance
+        m_dot_gen = rho_propellant * Ab * r_b
+        thrust = calculate_thrust(P_current, Ab)
+        
+        store_result(time, web, Ab, P_current, thrust)
+        
+        # Update pressure from ballistic solver (coupled)
+        P_current = update_chamber_pressure(m_dot_gen)
+
+    return results

@@ -1,32 +1,47 @@
 {
   "index.qmd": {
-    "index.html": "b2551a33"
-  },
-  "chapters/01-intro.qmd": {
-    "01-intro.html": "5d10e165"
-  },
-  "chapters/02-propellants.qmd": {
-    "02-propellants.html": "de0412ca"
-  },
-  "chapters/04-internal-ballistics.qmd": {
-    "04-internal-ballistics.html": "09ec97d6"
-  },
-  "chapters/03-grain-design.qmd": {
-    "03-grain-design.html": "63ff6ab5"
-  },
-  "chapters/05-burning-rate-and-kn.qmd": {
-    "05-burning-rate-and-kn.html": "9c55f7e7"
-  },
-  "chapters/06-performance-modeling.qmd": {
-    "06-performance-modeling.html": "5ea3943f"
+    "index.html": "705ad54f"
   },
   "chapters/00-preface.qmd": {
-    "00-preface.html": "bd4b141e"
+    "00-preface.html": "a383d1c1"
   },
-  "chapters/hide-python.qmd": {
-    "hide-python.html": "79bd219b"
+  "chapters/01-intro.qmd": {
+    "01-intro.html": "defa1bb6"
   },
-  "chapters/_06-performance-modeling.qmd": {
-    "_06-performance-modeling.html": "71a10602"
+  "chapters/02-propellants.qmd": {
+    "02-propellants.html": "64dfa543"
+  },
+  "chapters/03-grain-design.qmd": {
+    "03-grain-design.html": "fdee02f5"
+  },
+  "chapters/04-internal-ballistics.qmd": {
+    "04-internal-ballistics.html": "52b0e90c"
+  },
+  "chapters/04-burnback-simulation.qmd": {
+    "04-burnback-simulation.html": "1ec16904"
+  },
+  "chapters/05-burning-rate-and-kn.qmd": {
+    "05-burning-rate-and-kn.html": "a302e148"
+  },
+  "chapters/05-erosive-burning.qmd": {
+    "05-erosive-burning.html": "3f6094ac"
+  },
+  "chapters/06-performance-modeling.qmd": {
+    "06-performance-modeling.html": "6fc10dad"
+  },
+  "chapters/06-ignition-transient.qmd": {
+    "06-ignition-transient.html": "c65f5b2a"
+  },
+  "chapters/07-full-simulation.qmd": {
+    "07-full-simulation.html": "e252cacf"
+  },
+  "appendices/a-derivations.qmd": {
+    "a-derivations.html": "b8bfa726"
+  },
+  "appendices/b-propellant-database.qmd": {
+    "b-propellant-database.html": "c1b3f84e"
+  },
+  "appendices/c-python-modules.qmd": {
+    "c-python-modules.html": "cd9f901b"
   }
 }

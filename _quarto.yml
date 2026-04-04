@@ -3,9 +3,13 @@ project:
   output-dir: _book
 
 book:
-  title: "Solid Propellant Rocket Motors: Internal Ballistics"
+  title: "Solid Rocket Internal Ballistics"
+  subtitle: "Theory, Modeling, and Simulation"
   author: "Troy Altus"
-  date: April 1, 2026 (seriously)
+  date: today
+  repo-url: https://github.com/altustd/solid-rocket-internal-ballistics
+  repo-actions: [edit, issue]
+
   chapters:
     - index.qmd
     - chapters/00-preface.qmd
@@ -13,14 +17,29 @@ book:
     - chapters/02-propellants.qmd
     - chapters/03-grain-design.qmd
     - chapters/04-internal-ballistics.qmd
+    - chapters/04-burnback-simulation.qmd
     - chapters/05-burning-rate-and-kn.qmd
-    - chapters/_06-performance-modeling.qmd
-    #- chapters/hide-python.qmd
+    - chapters/05-erosive-burning.qmd
+    - chapters/06-performance-modeling.qmd
+    - chapters/06-ignition-transient.qmd
+    - chapters/07-full-simulation.qmd
+
+  appendices:
+    - appendices/a-derivations.qmd
+    - appendices/b-propellant-database.qmd
+    - appendices/c-python-modules.qmd
 
 format:
   html:
     theme: cosmo
+    css: styles.css
     number-sections: true
+    toc: true
+    toc-depth: 3
   pdf:
-    documentclass: scrbook    # Good for books, supports chapters well
+    documentclass: scrreprt
     number-sections: true
+    toc: true
+
+crossref:
+  chapters: true
