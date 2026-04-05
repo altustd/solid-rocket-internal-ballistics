@@ -1,6 +1,37 @@
-# {.unnumbered .unlisted} 
-<!--Solid Propellant Rocket Motors: Internal Ballistics {.unnumbered .unlisted}     --> 
-<!-- Optional: short subtitle or welcome text -->
-This ebook covers the internal ballistics of solid propellant rocket motors, with emphasis on performance modeling, grain design, and static test anchoring.
+---
+title: "Solid Rocket Internal Ballistics"
+subtitle: "Theory ⋅ Equations ⋅ Numerical Simulation"
+author: "Troy Altus"
+date: today
+---
 
-<!-- Cover image here if desired -->
+## Welcome
+
+This book is a comprehensive guide to the **internal ballistics** of solid propellant rocket motors. It covers the fundamental theory, mathematical derivations, and practical numerical simulation using Python.
+
+### What This Book Covers
+
+- Propellant characteristics and burn rate laws
+- Grain geometry and burnback simulation
+- Chamber pressure dynamics and K/N ratio
+- Erosive burning, ignition transients, and nozzle performance
+- A complete 0D internal ballistics simulator
+
+### How to Use This Book
+
+**Start here:**
+- [Chapter 1: Introduction](chapters/01-intro.qmd) — Motivation and overview
+- [Chapter 5: Internal Ballistics](chapters/05-internal-ballistics.qmd) — Core 0D model
+- [Chapter 10: Full Simulation](chapters/10-full-simulation.qmd) — Complete working model
+
+Use the **left sidebar** to navigate through all chapters and appendices.
+
+The accompanying Python code (`code/`) will eventually provide a reusable simulation library.
+
+:::{.callout-tip}
+**Tip**: Many chapters contain executable code examples. You can run them directly in the HTML version using `quarto preview`.
+:::
+
+---
+
+**Repository**: https://github.com/altustd/solid-rocket-internal-ballistics

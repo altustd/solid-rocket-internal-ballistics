@@ -6,13 +6,13 @@ order: 5
 
 ## Introduction
 
-Having defined propellant properties (Chapter 2), grain geometry (Chapter 3), and how the burning surface evolves with web distance (Chapter 4 — burnback), we now combine these to predict the time-dependent behavior of a solid rocket motor.
+Having defined propellant properties and grain geometry regression (burnback) in previous chapters, we now combine them to predict the time evolution of chamber pressure, mass flow rate, and thrust.
 
-This chapter introduces the **zero-dimensional (0D) internal ballistics model** — the standard engineering approach for preliminary design and performance prediction. It assumes spatially uniform pressure and temperature inside the combustion chamber.
+This chapter introduces the **zero-dimensional (0D) internal ballistics model**, the standard engineering approach for performance prediction.
 
 ## Mass Balance in the Combustion Chamber
 
-The foundation is conservation of mass:
+The fundamental equation is conservation of mass inside the chamber:
 
 $$
 \frac{dm_c}{dt} = \dot{m}_\text{gen} - \dot{m}_\text{out}
@@ -20,68 +20,43 @@ $$
 
 where:
 - \( m_c \): mass of combustion products in the chamber (kg)
-- \( \dot{m}_\text{gen} = \rho_p A_b(t) r(P_c) \): mass generation rate from propellant burning
+- \( \dot{m}_\text{gen} = \rho_p A_b(t) r(P_c) \): mass generation rate from burning propellant
 - \( \dot{m}_\text{out} \): mass expulsion rate through the nozzle
-- \( \rho_p \): propellant density (kg/m³)
-- \( A_b(t) \): instantaneous burning surface area (m²) from burnback
-- \( r(P_c) \): linear burn rate (m/s)
 
 ## Burn Rate Law (Vieille’s Law)
 
-The propellant regression rate is described by:
+The linear burn rate is given by:
 
 $$
 r(P_c) = a P_c^n
 $$
 
-where:
-- \( a \): burn rate coefficient
-- \( n \): pressure exponent (typically 0.2–0.7 for stable motors)
-- \( P_c \): chamber pressure
-
-A temperature-sensitive form is often used:
-
-$$
-a(T_i) = a_\text{ref} \left[1 + \sigma_p (T_i - T_\text{ref})\right]
-$$
+where \( a \) is the burn rate coefficient and \( n \) is the pressure exponent (typically 0.2–0.7 for stable motors).
 
 ## Nozzle Mass Flow Rate
 
-For choked nozzle flow:
+For a choked nozzle the outflow rate is:
 
 $$
 \dot{m}_\text{out} = \frac{P_c A_t}{c^*}
 $$
 
-where \( A_t \) is the throat area and \( c^* \) is the characteristic velocity of the propellant.
+where \( c^* \) is the characteristic velocity.
 
 ## Governing Differential Equation
 
-Substituting and simplifying yields the core 0D ODE for chamber pressure:
+Combining the above leads to the core pressure evolution equation:
 
 $$
 \frac{V_c}{c^{*2}} \frac{dP_c}{dt} = \rho_p A_b(w) r(P_c) - \frac{P_c A_t}{c^*}
 $$
 
-In practice we solve the coupled system for \( P_c(t) \) and web distance \( w(t) \), with \( A_b(w) \) supplied by the burnback module and numerical integration (e.g., `scipy.integrate.solve_ivp`).
-
-## Key Assumptions
-
-- Uniform chamber pressure and temperature (lumped parameter)
-- Constant propellant density and \( c^* \)
-- Negligible erosive burning and ignition transients (added in later chapters)
+We solve this coupled system numerically for chamber pressure \( P_c(t) \) and web distance \( w(t) \), using \( A_b(w) \) from the burnback module.
 
 ## Summary
 
-This chapter establishes the fundamental differential equations linking grain regression to motor performance. The next chapter explores the K/N ratio and equilibrium pressure in greater depth.
-
-## References
-
-- Sutton, G. P., & Biblarz, O. (2017). *Rocket Propulsion Elements* (9th ed.). Wiley.
-- Greatrix, D. R. (2012). *Powered Flight – The Engineering of Aerospace Propulsion*. Springer.
-- Zucrow, M. J., & Hoffman, J. D. (1976). *Gas Dynamics* (Vol. 1). Wiley.
-- Wimpress, R. N. (1950). *Internal Ballistics of Solid-Fuel Rockets*. McGraw-Hill.
+This chapter establishes the fundamental ODEs that link grain regression to motor performance. The next chapter explores the K/N ratio and equilibrium pressure in detail.
 
 :::{.callout-note}
-Executable Python implementations and example simulations are provided in the `code/` directory.
+Executable examples are available in the `code/` directory.
 :::

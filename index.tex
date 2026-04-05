@@ -203,13 +203,62 @@
 
 \bookmarksetup{startatroot}
 
-\chapter*{}\label{section}
+\chapter{Solid Rocket Internal
+Ballistics}\label{solid-rocket-internal-ballistics}
 
-\markboth{}{}
+Theory ⋅ Equations ⋅ Numerical Simulation
 
-This ebook covers the internal ballistics of solid propellant rocket
-motors, with emphasis on performance modeling, grain design, and static
-test anchoring.
+\hfill\break
+
+\section{Welcome}\label{welcome}
+
+This book is a comprehensive guide to the \textbf{internal ballistics}
+of solid propellant rocket motors. It covers the fundamental theory,
+mathematical derivations, and practical numerical simulation using
+Python.
+
+\subsection{What This Book Covers}\label{what-this-book-covers}
+
+\begin{itemize}
+\tightlist
+\item
+  Propellant characteristics and burn rate laws
+\item
+  Grain geometry and burnback simulation
+\item
+  Chamber pressure dynamics and K/N ratio
+\item
+  Erosive burning, ignition transients, and nozzle performance
+\item
+  A complete 0D internal ballistics simulator
+\end{itemize}
+
+\subsection{How to Use This Book}\label{how-to-use-this-book}
+
+\textbf{Start here:} - \href{chapters/01-intro.qmd}{Chapter 1:
+Introduction} --- Motivation and overview -
+\href{chapters/05-internal-ballistics.qmd}{Chapter 5: Internal
+Ballistics} --- Core 0D model -
+\href{chapters/10-full-simulation.qmd}{Chapter 10: Full Simulation} ---
+Complete working model
+
+Use the \textbf{left sidebar} to navigate through all chapters and
+appendices.
+
+The accompanying Python code (\texttt{code/}) will eventually provide a
+reusable simulation library.
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+\textbf{Tip}: Many chapters contain executable code examples. You can
+run them directly in the HTML version using \texttt{quarto\ preview}.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Repository}:
+https://github.com/altustd/solid-rocket-internal-ballistics
 
 \bookmarksetup{startatroot}
 
@@ -574,20 +623,18 @@ burnback}
 
 \section{Introduction}\label{introduction-2}
 
-Having defined propellant properties (Chapter 2), grain geometry
-(Chapter 3), and how the burning surface evolves with web distance
-(Chapter 4 --- burnback), we now combine these to predict the
-time-dependent behavior of a solid rocket motor.
+Having defined propellant properties and grain geometry regression
+(burnback) in previous chapters, we now combine them to predict the time
+evolution of chamber pressure, mass flow rate, and thrust.
 
 This chapter introduces the \textbf{zero-dimensional (0D) internal
-ballistics model} --- the standard engineering approach for preliminary
-design and performance prediction. It assumes spatially uniform pressure
-and temperature inside the combustion chamber.
+ballistics model}, the standard engineering approach for performance
+prediction.
 
 \section{Mass Balance in the Combustion
 Chamber}\label{mass-balance-in-the-combustion-chamber}
 
-The foundation is conservation of mass:
+The fundamental equation is conservation of mass inside the chamber:
 
 \[
 \frac{dm_c}{dt} = \dot{m}_\text{gen} - \dot{m}_\text{out}
@@ -595,95 +642,52 @@ The foundation is conservation of mass:
 
 where: - ( m\_c ): mass of combustion products in the chamber (kg) - (
 \dot{m}\_\text{gen} = \rho\emph{p A\_b(t) r(P\_c) ): mass generation
-rate from propellant burning - ( \dot{m}}\text{out} ): mass expulsion
-rate through the nozzle - ( \rho\_p ): propellant density (kg/m³) - (
-A\_b(t) ): instantaneous burning surface area (m²) from burnback - (
-r(P\_c) ): linear burn rate (m/s)
+rate from burning propellant - ( \dot{m}}\text{out} ): mass expulsion
+rate through the nozzle
 
 \section{Burn Rate Law (Vieille's
 Law)}\label{burn-rate-law-vieilles-law}
 
-The propellant regression rate is described by:
+The linear burn rate is given by:
 
 \[
 r(P_c) = a P_c^n
 \]
 
-where: - ( a ): burn rate coefficient - ( n ): pressure exponent
-(typically 0.2--0.7 for stable motors) - ( P\_c ): chamber pressure
-
-A temperature-sensitive form is often used:
-
-\[
-a(T_i) = a_\text{ref} \left[1 + \sigma_p (T_i - T_\text{ref})\right]
-\]
+where ( a ) is the burn rate coefficient and ( n ) is the pressure
+exponent (typically 0.2--0.7 for stable motors).
 
 \section{Nozzle Mass Flow Rate}\label{nozzle-mass-flow-rate}
 
-For choked nozzle flow:
+For a choked nozzle the outflow rate is:
 
 \[
 \dot{m}_\text{out} = \frac{P_c A_t}{c^*}
 \]
 
-where ( A\_t ) is the throat area and ( c\^{}* ) is the characteristic
-velocity of the propellant.
+where ( c\^{}* ) is the characteristic velocity.
 
 \section{Governing Differential
 Equation}\label{governing-differential-equation}
 
-Substituting and simplifying yields the core 0D ODE for chamber
-pressure:
+Combining the above leads to the core pressure evolution equation:
 
 \[
 \frac{V_c}{c^{*2}} \frac{dP_c}{dt} = \rho_p A_b(w) r(P_c) - \frac{P_c A_t}{c^*}
 \]
 
-In practice we solve the coupled system for ( P\_c(t) ) and web distance
-( w(t) ), with ( A\_b(w) ) supplied by the burnback module and numerical
-integration (e.g., \texttt{scipy.integrate.solve\_ivp}).
-
-\section{Key Assumptions}\label{key-assumptions}
-
-\begin{itemize}
-\tightlist
-\item
-  Uniform chamber pressure and temperature (lumped parameter)
-\item
-  Constant propellant density and ( c\^{}* )
-\item
-  Negligible erosive burning and ignition transients (added in later
-  chapters)
-\end{itemize}
+We solve this coupled system numerically for chamber pressure ( P\_c(t)
+) and web distance ( w(t) ), using ( A\_b(w) ) from the burnback module.
 
 \section{Summary}\label{summary}
 
-This chapter establishes the fundamental differential equations linking
-grain regression to motor performance. The next chapter explores the K/N
-ratio and equilibrium pressure in greater depth.
-
-\section{References}\label{references}
-
-\begin{itemize}
-\tightlist
-\item
-  Sutton, G. P., \& Biblarz, O. (2017). \emph{Rocket Propulsion
-  Elements} (9th ed.). Wiley.
-\item
-  Greatrix, D. R. (2012). \emph{Powered Flight -- The Engineering of
-  Aerospace Propulsion}. Springer.
-\item
-  Zucrow, M. J., \& Hoffman, J. D. (1976). \emph{Gas Dynamics} (Vol. 1).
-  Wiley.
-\item
-  Wimpress, R. N. (1950). \emph{Internal Ballistics of Solid-Fuel
-  Rockets}. McGraw-Hill.
-\end{itemize}
+This chapter establishes the fundamental ODEs that link grain regression
+to motor performance. The next chapter explores the K/N ratio and
+equilibrium pressure in detail.
 
 \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
-Executable Python implementations and example simulations are provided
-in the \texttt{code/} directory.
+Executable examples are available in the \texttt{code/} directory.
 
 \end{tcolorbox}
 
@@ -925,7 +929,7 @@ In the next chapter we will introduce erosive burning corrections, which
 become important when high port velocities alter the effective burn rate
 beyond the simple pressure dependence.
 
-\section{References}\label{references-1}
+\section{References}\label{references}
 
 \begin{itemize}
 \tightlist
@@ -959,231 +963,60 @@ Effects of High Port Velocity on Burning Rate
 
 \section{Introduction}\label{introduction-4}
 
-In the standard 0D internal ballistics model presented in Chapters 5 and
-6, the burning rate depends only on chamber pressure (and initial
-temperature) through Vieille's law: ( r = a P\^{}n ).
+In the standard 0D internal ballistics model, the burning rate depends
+only on chamber pressure via Vieille's law ( r = a P\_c\^{}n ).
 
-However, in many real motors --- especially those with high
-length-to-diameter (L/D) ratios, narrow ports, or high mass flux --- the
-hot combustion gases flowing parallel to the burning surface can
-significantly \textbf{increase} the local burning rate. This phenomenon
-is called \textbf{erosive burning}.
-
-Erosive burning is most pronounced near the aft end of the grain, where
-the core flow velocity (and thus mass flux) is highest due to cumulative
-mass addition from upstream burning surfaces. It can lead to:
-
-\begin{itemize}
-\tightlist
-\item
-  Higher-than-predicted chamber pressure
-\item
-  Altered thrust-time profile (often more progressive)
-\item
-  Increased risk of pressure spikes or structural failure
-\item
-  Uneven web burnout and potential slag or residue issues
-\end{itemize}
-
-This chapter introduces the physical mechanism behind erosive burning
-and presents the most widely used engineering model: the
-\textbf{Lenoir-Robillard correlation}.
-
-\section{Physical Mechanism}\label{physical-mechanism}
-
-Erosive burning is primarily a \textbf{heat transfer} phenomenon. In
-normal (non-erosive) combustion:
-
-\begin{itemize}
-\tightlist
-\item
-  Heat feedback to the propellant surface comes mainly from the thin
-  primary combustion zone (flame) just above the surface via conduction,
-  convection, and radiation.
-\item
-  The burning rate is limited by how quickly the propellant reaches
-  ignition temperature.
-\end{itemize}
-
-When high-velocity combustion products flow parallel to the surface:
-
-\begin{itemize}
-\tightlist
-\item
-  The boundary layer is thinned or disrupted.
-\item
-  Convective heat transfer coefficient increases.
-\item
-  More heat is transferred to the propellant surface per unit time.
-\item
-  The propellant pyrolyzes and burns faster.
-\end{itemize}
-
-This effect becomes noticeable only above a certain \textbf{threshold
-velocity} or mass flux, below which the normal pressure-dependent
-burning dominates.
+However, when hot combustion gases flow at high velocity parallel to the
+burning surface, they can significantly increase the local burn rate.
+This is called \textbf{erosive burning}. It is most severe near the aft
+end of the grain where mass flux is highest.
 
 \section{Lenoir-Robillard Model}\label{lenoir-robillard-model}
 
-The most common and practical engineering model for erosive burning was
-proposed by Lenoir and Robillard (1957). It expresses the \textbf{total
-burning rate} ( r ) as the sum of two contributions:
+The total burn rate is modeled as:
 
 \[
 r = r_0 + r_e
 \]
 
-where: - ( r\_0 = a P\_c\^{}n ): the normal (pressure-dependent) burning
-rate - ( r\_e ): the additional erosive burning rate
-
-The erosive component is given by:
+where ( r\_0 = a P\_c\^{}n ) and the erosive term is:
 
 \[
-r_e = \alpha \, G^{0.8} \, D^{-0.2} \, \exp\left( -\beta \frac{\rho_p r}{G} \right)
+r_e = \frac{\alpha G^{0.8}}{D^{0.2}} \exp\left( -\beta \frac{\rho_p r}{G} \right)
 \]
-
-or in the commonly simplified form used in many codes:
-
-\[
-r_e = \frac{\alpha \, G^{0.8}}{D^{0.2}} \exp\left( - \frac{\beta \rho_p r}{G} \right)
-\]
-
-where: - ( G = \frac{\dot{m}}{A_p} ): local mass flux in the port
-(kg/m²·s), with ( A\_p ) the port area - ( D ): hydraulic diameter of
-the port (m) - ( \rho\_p ): propellant density (kg/m³) - ( \alpha,
-\beta ): empirical constants specific to the propellant (determined from
-experiments)
-
-The exponential term represents the \textbf{blowing effect} --- the
-outward flow of pyrolysis gases from the burning surface reduces the
-effectiveness of the convective heat transfer (transpiration cooling).
-At very high burning rates or low mass flux, this term suppresses
-erosive burning.
-
-Many implementations use a \textbf{threshold} below which ( r\_e = 0 ):
-
-\[
-r_e = 
-\begin{cases}
-0 & \text{if } G < G_{\text{threshold}} \\
-\text{formula above} & \text{otherwise}
-\end{cases}
-\]
-
-\section{Implementation in the 0D
-Model}\label{implementation-in-the-0d-model}
-
-When erosive burning is included, the burn rate in the governing ODE
-(Chapter 5) becomes position- and time-dependent:
-
-\[
-r(x, t) = a P_c^n + r_e(G(x, t))
-\]
-
-where ( G(x, t) = \frac{\dot{m}(x, t)}{A_p(x, t)} ) and ( \dot{m}(x, t)
-) is the cumulative mass flow from the head end up to axial position ( x
-).
-
-This turns the simple lumped 0D model into a \textbf{quasi-1D} model,
-requiring integration along the grain length (or at least several
-ballistic elements).
-
-In practice, for preliminary design:
 
 \begin{itemize}
 \tightlist
 \item
-  Compute local ( G ) using the current port area from burnback.
+  ( G = \dot{m} / A\_p ): local mass flux (kg/m²·s)
 \item
-  Apply the Lenoir-Robillard correction locally.
+  ( D ): hydraulic diameter of the port (m)
 \item
-  Average or integrate to update the effective ( A\_b r ) term in the
-  mass balance.
+  ( \alpha, \beta ): propellant-specific constants
 \end{itemize}
 
-\section{Design Implications and
-Mitigation}\label{design-implications-and-mitigation}
+\section{Effect on Mass Generation}\label{effect-on-mass-generation}
 
-Erosive burning is more severe when:
+When erosive burning is active, the mass generation rate becomes:
 
-\begin{itemize}
-\tightlist
-\item
-  Port area is small relative to throat area (high ( K\_n ))
-\item
-  Grain is long and narrow (high L/D)
-\item
-  Propellant has low burn rate (small ( a ) or ( n ))
-\item
-  High chamber pressure is targeted
-\end{itemize}
+\[
+\dot{m}_\text{gen} = \rho_p A_b(w) \, r(P_c, G)
+\]
 
-Common mitigation strategies include:
-
-\begin{itemize}
-\tightlist
-\item
-  Increasing initial port diameter or using progressive geometries
-  (star, finocyl) that open up quickly
-\item
-  Designing for lower average ( K\_n )
-\item
-  Using propellants with higher burn rate or lower erosive sensitivity
-  (different ( \alpha, \beta ))
-\item
-  Adding inhibitors or shaping the grain to reduce aft-end velocities
-\item
-  Accepting some erosive burning and accounting for it in simulations
-\end{itemize}
-
-In extreme cases, erosive burning can cause the aft end of the grain to
-burn through prematurely, leading to nozzle erosion or case overheating.
+This term is used in the chamber pressure differential equation from
+Chapter 5.
 
 \section{Summary}\label{summary-2}
 
-Erosive burning augments the normal pressure-dependent burn rate due to
-enhanced convective heat transfer from high-velocity core flow. The
-Lenoir-Robillard model provides a practical semi-empirical way to
-include this effect:
+Erosive burning is an important correction for long or high-performance
+motors. It is usually added after the basic 0D model is working.
 
-\[
-r = a P^n + \frac{\alpha G^{0.8}}{D^{0.2}} \exp\left( -\beta \frac{\rho_p r}{G} \right)
-\]
-
-Incorporating erosive burning improves the accuracy of pressure-time
-predictions, especially for high-performance or high L/D motors. It is
-typically added after the basic 0D model is working and validated
-against non-erosive cases.
-
-In the next chapter we will examine \textbf{ignition transients}, the
-initial pressurization phase that occurs before steady-state burning is
-established.
-
-\section{References}\label{references-2}
-
-\begin{itemize}
-\tightlist
-\item
-  Lenoir, J. M., \& Robillard, G. (1957). A Mathematical Method to
-  Predict the Effects of Erosive Burning in Solid Propellant Rockets.
-  \emph{Sixth Symposium (International) on Combustion}.
-\item
-  Sutton, G. P., \& Biblarz, O. (2017). \emph{Rocket Propulsion
-  Elements}.
-\item
-  Greatrix, D. R. (2012). \emph{Powered Flight -- The Engineering of
-  Aerospace Propulsion}.
-\item
-  Nakka, R. Solid Rocket Motor Design Resources (practical
-  implementation notes).
-\end{itemize}
+The next chapter discusses nozzle flow and thrust.
 
 \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
-The Python implementation in \texttt{code/simulator.py} will include an
-optional \texttt{erosive=True} flag that applies a Lenoir-Robillard
-correction based on local mass flux. Propellant-specific ( \alpha ) and
-( \beta ) values will be stored in the propellant database.
+Future Python code in \texttt{code/simulator.py} will support an
+\texttt{erosive=True} option.
 
 \end{tcolorbox}
 
@@ -1404,7 +1237,7 @@ In the next chapter we will address the \textbf{ignition transient} ---
 the rapid pressurization phase from igniter activation until steady
 burning is established.
 
-\section{References}\label{references-3}
+\section{References}\label{references-1}
 
 \begin{itemize}
 \tightlist
@@ -1638,7 +1471,7 @@ In the next chapter we will discuss \textbf{overall motor performance
 metrics}, validation against experimental data, and sensitivity
 analysis.
 
-\section{References}\label{references-4}
+\section{References}\label{references-2}
 
 \begin{itemize}
 \tightlist
@@ -1669,20 +1502,20 @@ mitigation strategies.
 
 \bookmarksetup{startatroot}
 
-\chapter{}\label{section-1}
+\chapter{}\label{section}
 
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{part}{Appendices}
 \appendix
 
+\chapter{}\label{section-1}
+
 \chapter{}\label{section-2}
 
 \chapter{}\label{section-3}
 
 \chapter{}\label{section-4}
-
-\chapter{}\label{section-5}
 
 
 

@@ -6,133 +6,44 @@ order: 7
 
 ## Introduction
 
-In the standard 0D internal ballistics model presented in Chapters 5 and 6, the burning rate depends only on chamber pressure (and initial temperature) through Vieille’s law: \( r = a P^n \).
+In the standard 0D internal ballistics model, the burning rate depends only on chamber pressure via Vieille’s law \( r = a P_c^n \).
 
-However, in many real motors — especially those with high length-to-diameter (L/D) ratios, narrow ports, or high mass flux — the hot combustion gases flowing parallel to the burning surface can significantly **increase** the local burning rate. This phenomenon is called **erosive burning**.
-
-Erosive burning is most pronounced near the aft end of the grain, where the core flow velocity (and thus mass flux) is highest due to cumulative mass addition from upstream burning surfaces. It can lead to:
-
-- Higher-than-predicted chamber pressure
-- Altered thrust-time profile (often more progressive)
-- Increased risk of pressure spikes or structural failure
-- Uneven web burnout and potential slag or residue issues
-
-This chapter introduces the physical mechanism behind erosive burning and presents the most widely used engineering model: the **Lenoir-Robillard correlation**.
-
-## Physical Mechanism
-
-Erosive burning is primarily a **heat transfer** phenomenon. In normal (non-erosive) combustion:
-
-- Heat feedback to the propellant surface comes mainly from the thin primary combustion zone (flame) just above the surface via conduction, convection, and radiation.
-- The burning rate is limited by how quickly the propellant reaches ignition temperature.
-
-When high-velocity combustion products flow parallel to the surface:
-
-- The boundary layer is thinned or disrupted.
-- Convective heat transfer coefficient increases.
-- More heat is transferred to the propellant surface per unit time.
-- The propellant pyrolyzes and burns faster.
-
-This effect becomes noticeable only above a certain **threshold velocity** or mass flux, below which the normal pressure-dependent burning dominates.
+However, when hot combustion gases flow at high velocity parallel to the burning surface, they can significantly increase the local burn rate. This is called **erosive burning**. It is most severe near the aft end of the grain where mass flux is highest.
 
 ## Lenoir-Robillard Model
 
-The most common and practical engineering model for erosive burning was proposed by Lenoir and Robillard (1957). It expresses the **total burning rate** \( r \) as the sum of two contributions:
+The total burn rate is modeled as:
 
 $$
 r = r_0 + r_e
 $$
 
-where:
-- \( r_0 = a P_c^n \): the normal (pressure-dependent) burning rate
-- \( r_e \): the additional erosive burning rate
-
-The erosive component is given by:
+where \( r_0 = a P_c^n \) and the erosive term is:
 
 $$
-r_e = \alpha \, G^{0.8} \, D^{-0.2} \, \exp\left( -\beta \frac{\rho_p r}{G} \right)
+r_e = \frac{\alpha G^{0.8}}{D^{0.2}} \exp\left( -\beta \frac{\rho_p r}{G} \right)
 $$
 
-or in the commonly simplified form used in many codes:
-
-$$
-r_e = \frac{\alpha \, G^{0.8}}{D^{0.2}} \exp\left( - \frac{\beta \rho_p r}{G} \right)
-$$
-
-where:
-- \( G = \frac{\dot{m}}{A_p} \): local mass flux in the port (kg/m²·s), with \( A_p \) the port area
+- \( G = \dot{m} / A_p \): local mass flux (kg/m²·s)
 - \( D \): hydraulic diameter of the port (m)
-- \( \rho_p \): propellant density (kg/m³)
-- \( \alpha, \beta \): empirical constants specific to the propellant (determined from experiments)
+- \( \alpha, \beta \): propellant-specific constants
 
-The exponential term represents the **blowing effect** — the outward flow of pyrolysis gases from the burning surface reduces the effectiveness of the convective heat transfer (transpiration cooling). At very high burning rates or low mass flux, this term suppresses erosive burning.
+## Effect on Mass Generation
 
-Many implementations use a **threshold** below which \( r_e = 0 \):
-
-$$
-r_e = 
-\begin{cases}
-0 & \text{if } G < G_{\text{threshold}} \\
-\text{formula above} & \text{otherwise}
-\end{cases}
-$$
-
-## Implementation in the 0D Model
-
-When erosive burning is included, the burn rate in the governing ODE (Chapter 5) becomes position- and time-dependent:
+When erosive burning is active, the mass generation rate becomes:
 
 $$
-r(x, t) = a P_c^n + r_e(G(x, t))
+\dot{m}_\text{gen} = \rho_p A_b(w) \, r(P_c, G)
 $$
 
-where \( G(x, t) = \frac{\dot{m}(x, t)}{A_p(x, t)} \) and \( \dot{m}(x, t) \) is the cumulative mass flow from the head end up to axial position \( x \).
-
-This turns the simple lumped 0D model into a **quasi-1D** model, requiring integration along the grain length (or at least several ballistic elements).
-
-In practice, for preliminary design:
-
-- Compute local \( G \) using the current port area from burnback.
-- Apply the Lenoir-Robillard correction locally.
-- Average or integrate to update the effective \( A_b r \) term in the mass balance.
-
-## Design Implications and Mitigation
-
-Erosive burning is more severe when:
-
-- Port area is small relative to throat area (high \( K_n \))
-- Grain is long and narrow (high L/D)
-- Propellant has low burn rate (small \( a \) or \( n \))
-- High chamber pressure is targeted
-
-Common mitigation strategies include:
-
-- Increasing initial port diameter or using progressive geometries (star, finocyl) that open up quickly
-- Designing for lower average \( K_n \)
-- Using propellants with higher burn rate or lower erosive sensitivity (different \( \alpha, \beta \))
-- Adding inhibitors or shaping the grain to reduce aft-end velocities
-- Accepting some erosive burning and accounting for it in simulations
-
-In extreme cases, erosive burning can cause the aft end of the grain to burn through prematurely, leading to nozzle erosion or case overheating.
+This term is used in the chamber pressure differential equation from Chapter 5.
 
 ## Summary
 
-Erosive burning augments the normal pressure-dependent burn rate due to enhanced convective heat transfer from high-velocity core flow. The Lenoir-Robillard model provides a practical semi-empirical way to include this effect:
+Erosive burning is an important correction for long or high-performance motors. It is usually added after the basic 0D model is working.
 
-$$
-r = a P^n + \frac{\alpha G^{0.8}}{D^{0.2}} \exp\left( -\beta \frac{\rho_p r}{G} \right)
-$$
-
-Incorporating erosive burning improves the accuracy of pressure-time predictions, especially for high-performance or high L/D motors. It is typically added after the basic 0D model is working and validated against non-erosive cases.
-
-In the next chapter we will examine **ignition transients**, the initial pressurization phase that occurs before steady-state burning is established.
-
-## References
-
-- Lenoir, J. M., & Robillard, G. (1957). A Mathematical Method to Predict the Effects of Erosive Burning in Solid Propellant Rockets. *Sixth Symposium (International) on Combustion*.
-- Sutton, G. P., & Biblarz, O. (2017). *Rocket Propulsion Elements*.
-- Greatrix, D. R. (2012). *Powered Flight – The Engineering of Aerospace Propulsion*.
-- Nakka, R. Solid Rocket Motor Design Resources (practical implementation notes).
+The next chapter discusses nozzle flow and thrust.
 
 :::{.callout-note}
-The Python implementation in `code/simulator.py` will include an optional `erosive=True` flag that applies a Lenoir-Robillard correction based on local mass flux. Propellant-specific \( \alpha \) and \( \beta \) values will be stored in the propellant database.
+Future Python code in `code/simulator.py` will support an `erosive=True` option.
 :::
