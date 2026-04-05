@@ -1,219 +1,159 @@
-# Performance Modeling of Solid Rocket Motors
+---
+title: "Nozzle Flow and Thrust"
+subtitle: "Characteristic Velocity, Thrust Coefficient, and Motor Performance"
+order: 8
+---
 
 ## Introduction
 
-Performance modeling is the core of solid rocket motor (SRM) design and analysis. It predicts how a motor will behave—specifically the chamber pressure-time (P-t) history, thrust-time curve, total impulse, and delivered specific impulse—before any hardware is built or tested. Accurate modeling reduces the number of expensive static firings, identifies design issues early, and allows optimization of grain geometry, nozzle sizing, and propellant formulation.
+Chapters 5–7 focused on the combustion chamber: mass generation from the propellant grain, burn rate laws, equilibrium pressure via the K/N ratio, and corrections such as erosive burning.  
 
-Modern SRM performance prediction combines **thermochemistry**, **grain burnback geometry**, and **internal ballistics**. The most common approach is a **zero-dimensional (0D) lumped-parameter model** that assumes uniform chamber pressure and temperature. Higher-fidelity 1D or CFD tools are used for advanced cases involving erosive burning, acoustic instability, or complex flow.
+Now we turn to the **nozzle**, which converts the high-pressure, high-temperature combustion gases into high-velocity exhaust, producing thrust.  
 
-This chapter covers:
-- Common analysis tools,
-- The detailed mathematics of a typical ballistic prediction,
-- The critical role of static test data in anchoring models, and
-- How ballisticians establish key propellant parameters such as burning-rate coefficient $a$, pressure exponent $n$, and characteristic velocity $c^*$.
+This chapter covers the key nozzle relations used in internal ballistics:
 
-## Common Analysis Tools
+- Characteristic velocity \( c^* \) (a measure of propellant combustion efficiency)
+- Thrust coefficient \( C_F \) (a measure of nozzle expansion efficiency)
+- The overall thrust equation
+- Specific impulse \( I_{sp} \)
 
-SRM performance tools span simple spreadsheets for hobbyists to industrial-grade codes used by agencies like NASA and ESA.
+These quantities allow us to convert chamber pressure \( P_c(t) \) and mass flow rate directly into thrust \( F(t) \).
 
-| Category              | Examples                          | Key Capabilities                                      | Typical Users                  |
-|-----------------------|-----------------------------------|-------------------------------------------------------|--------------------------------|
-| Spreadsheet / Simple  | Nakka SRM.xls                     | Kn vs. web, P-t, thrust-t curves                      | Hobbyists, students            |
-| Dedicated 0D simulators | BurnSim, openMotor (open-source) | Grain design, burnback, steady-state ballistics       | Amateur/experimental rocketry  |
-| Professional / JANNAF | SPP (Solid Performance Program)   | 3D grain design, 1D/2D ballistics, loss accounting, stability (SSP) | Government, aerospace primes   |
-| Custom / Research     | Python/MATLAB scripts, PIBAL, ProSTools | Flexible ODE solvers, user-defined burning-rate models | Researchers, advanced amateurs |
-| CFD / High-fidelity   | ANSYS Fluent, OpenFOAM-based solvers (e.g., srmFOAM) | Transient flow, erosive burning, multi-phase effects | Advanced R&D                   |
+## Characteristic Velocity \( c^* \)
 
-Most tools share a common workflow:
-1. **Thermochemistry** (CEA, PROPEP, or RPA) → generates $c^*$, $\gamma$, flame temperature $T_c$, etc.
-2. **Grain geometry & burnback** → computes burning surface area $A_b$ as a function of web distance burned.
-3. **Ballistics solver** → integrates the governing ODEs to produce P(t) and F(t).
-4. **Post-processing** → impulse, $I_{sp}$, efficiency factors.
+The **characteristic velocity** \( c^* \) is a propellant property that quantifies the efficiency of the combustion process and the conversion of thermal energy into directed flow at the throat. It is independent of the nozzle expansion ratio.
 
-The GitHub repository [`solid-rocket-internal-ballistics`](https://github.com/altustd/solid-rocket-internal-ballistics) is an excellent platform for implementing these models in Quarto with embedded Python or R code for reproducible simulations.
-
-## Typical Ballistics (Pressure and Thrust) Prediction
-
-A **typical ballistic prediction** uses the following assumptions:
-- Uniform chamber pressure and temperature (0D model),
-- Steady-state choked nozzle flow,
-- Propellant burning follows Vieille’s (Saint-Robert’s) law,
-- No erosive burning or dynamic effects unless added explicitly.
-
-### Burning-Rate Law
-The linear burning rate $r$ is given by
+It is defined as:
 
 $$
-r = a \, P_c^n
+c^* = \frac{P_c A_t}{\dot{m}}
 $$
 
 where:
-- $a$ = burning-rate coefficient (units depend on pressure units, e.g., in/s/psi$^n$),
-- $n$ = burning-rate pressure exponent (dimensionless, typically 0.2–0.7),
-- $P_c$ = chamber pressure.
+- \( P_c \): chamber pressure (Pa)
+- \( A_t \): nozzle throat area (m²)
+- \( \dot{m} \): mass flow rate through the nozzle (kg/s)
 
-### Mass Balance (Steady-State Equilibrium Pressure)
-At any instant the mass generation rate equals the mass discharge rate:
-
-$$
-\dot{m}_\text{gen} = \rho_p \, A_b \, r = \rho_p \, A_b \, a \, P_c^n
-$$
+For an ideal gas with isentropic choked flow at the throat, the theoretical \( c^* \) is:
 
 $$
-\dot{m}_\text{exit} = \frac{P_c \, A_t}{c^*}
+c^* = \sqrt{ \frac{R T_c}{\gamma} } \left( \frac{\gamma + 1}{2} \right)^{\frac{\gamma + 1}{2(\gamma - 1)}} \frac{1}{\Gamma(\gamma)}
 $$
 
-Setting $\dot{m}_\text{gen} = \dot{m}_\text{exit}$ and solving for chamber pressure yields the classic **equilibrium pressure** equation:
+or more commonly expressed using the gamma function form:
 
 $$
-P_c = \left( \rho_p \, a \, c^* \, K_n \right)^{\frac{1}{1-n}}
+c^* = \frac{\sqrt{\gamma R T_c}}{\gamma} \left( \frac{\gamma + 1}{2} \right)^{\frac{\gamma + 1}{2(\gamma - 1)}}
 $$
 
-where $K_n = A_b / A_t$ is the **Knudsen number** (instantaneous burning surface to throat area ratio).  
-This algebraic form gives the *instantaneous* equilibrium pressure once $A_b$ is known.
+where:
+- \( \gamma \): ratio of specific heats of the combustion products
+- \( R \): specific gas constant (J/kg·K)
+- \( T_c \): chamber (stagnation) temperature (K)
 
-### Transient Pressure Evolution (Full ODE Model)
-For accurate prediction (especially ignition and tail-off transients), integrate the lumped-parameter mass and energy equations:
+In practice, \( c^* \) values for solid propellants are obtained from thermochemical equilibrium codes (CEA, RPA, etc.) and stored in the propellant database. Typical values range from 1400–1800 m/s for amateur propellants (e.g., KNSB, APCP).
 
-$$
-\frac{dP_c}{dt} = \frac{R_g T_c}{V_c} \left( \rho_p A_b r - \frac{P_c A_t}{c^*} \right)
-$$
+## Thrust Equation
 
-(derived from $\frac{dm}{dt} = \dot{m}_\text{in} - \dot{m}_\text{out}$ and the ideal-gas law with constant-volume assumption).  
-Here $V_c$ is the instantaneous free chamber volume (also changes with web burned).
-
-Many codes use a simple forward-Euler or Runge-Kutta integrator with small time steps ($\Delta t \approx 0.001$–$0.01$ s). At each step:
-- Update web distance $w = \int r \, dt$,
-- Update $A_b(w)$ and $V_c(w)$ from the burnback geometry,
-- Update $r = a P_c^n$,
-- Solve for new $P_c$.
-
-### Thrust Prediction
-Instantaneous thrust is
+The instantaneous thrust produced by the motor is:
 
 $$
-F = \dot{m}_\text{exit} \, c^* \, C_F = P_c \, A_t \, C_F
+F = \dot{m} \, v_e + (P_e - P_a) A_e
 $$
 
-where the thrust coefficient $C_F$ accounts for nozzle expansion, ambient pressure, and losses:
+where:
+- \( v_e \): effective exhaust velocity at the nozzle exit
+- \( P_e \): exit plane pressure
+- \( P_a \): ambient pressure
+- \( A_e \): nozzle exit area
+
+For choked flow, \( \dot{m} = \frac{P_c A_t}{c^*} \). Substituting and rearranging yields the very useful form:
 
 $$
-C_F = \sqrt{\frac{2\gamma^2}{\gamma-1} \left( \frac{2}{\gamma+1} \right)^{\frac{\gamma+1}{\gamma-1}} \left[ 1 - \left( \frac{P_e}{P_c} \right)^{\frac{\gamma-1}{\gamma}} \right]} + \frac{A_e}{A_t} \left( \frac{P_e}{P_c} - \frac{P_a}{P_c} \right)
+F = C_F \, P_c \, A_t
 $$
 
-(ideal 1D form). Real codes multiply by nozzle efficiency $\eta_{C_F}$ obtained from SPP or CFD.
+where \( C_F \) is the **thrust coefficient**.
 
-The resulting P-t and F-t curves are integrated to give total impulse $I_\text{total} = \int F \, dt$ and delivered specific impulse.
+## Thrust Coefficient \( C_F \)
 
-## Role of Static Test Data in Anchoring Ballistic Models
+The thrust coefficient is a dimensionless parameter that captures the efficiency of the nozzle expansion process. For an ideally expanded nozzle (\( P_e = P_a \)) it depends primarily on \( \gamma \) and the expansion ratio \( \epsilon = A_e / A_t \).
 
-No model is complete without validation. **Static (ground) firing tests** are the gold standard for anchoring ballistic models. They provide:
-- Measured chamber-pressure transducer trace $P_c(t)$,
-- Thrust stand trace $F(t)$,
-- Burn time, total impulse, and delivered $I_{sp}$,
-- High-speed video or X-ray for anomalies (e.g., case insulation erosion, slag accumulation).
+The ideal thrust coefficient is:
 
-**Anchoring process**:
-1. Run the ballistic code with *nominal* $a$, $n$, $c^*$.
-2. Compare predicted vs. measured P-t and F-t curves.
-3. Adjust parameters (or add correction factors) until the curves match within acceptable tolerance (±3–5 % on pressure and thrust is typical for preliminary designs).
-4. Identify model deficiencies (e.g., if pressure rises faster than predicted → erosive burning or ignition transient; if tail-off is longer → slag or insulation ablation).
+$$
+C_F = \sqrt{ \frac{2 \gamma^2}{\gamma - 1} \left( \frac{2}{\gamma + 1} \right)^{\frac{\gamma + 1}{\gamma - 1}} \left[ 1 - \left( \frac{P_e}{P_c} \right)^{\frac{\gamma - 1}{\gamma}} \right] } + \left( \frac{P_e}{P_c} - \frac{P_a}{P_c} \right) \epsilon
+$$
 
-Static data also yield **effective** (motor-scale) burning-rate parameters that often differ slightly from strand-burner values due to scale effects, radiation, and two-phase flow.
+In vacuum (\( P_a = 0 \)) and for optimum expansion (\( P_e = P_a \)), this simplifies significantly.
 
-## How the Ballistician Establishes Propellant Parameters
+In the 0D ballistics model, we usually assume a fixed \( C_F \) (calculated from design expansion ratio and \( \gamma \)) or compute it as a weak function of \( P_c \).
 
-| Parameter                  | Primary Determination Method                          | Secondary / Refinement Method                  |
-|----------------------------|-------------------------------------------------------|------------------------------------------------|
-| Burning-rate coefficient $a$ & exponent $n$ | Closed-bomb or strand-burner tests (constant-pressure bomb) | Inverted from motor static-test P-t data (Nakka method, thickness-over-time, or mass-balance) |
-| Characteristic velocity $c^*$ | NASA CEA or PROPEP thermochemical equilibrium code | Measured from static tests: $c^*_\text{meas} = \frac{P_c A_t t_b}{m_\text{prop}}$ |
-| Temperature sensitivity $\sigma_p$ | Strand tests at multiple initial grain temperatures | Motor firings at cold/hot conditions           |
-| Erosive-burning constants  | Specialized high-velocity strand or subscale motor tests | Full-motor CFD or empirical scaling            |
-| Combustion efficiency $\eta_{c*}$ | Theoretical $c^*$ vs. measured $c^*$ from static tests | —                                              |
+## Specific Impulse \( I_{sp} \)
 
-**Practical workflow used by ballisticians**:
-1. **Lab-scale**: Strand-burner data → baseline $a$, $n$ at several pressures and temperatures.
-2. **Thermochemistry**: CEA → theoretical $c^*$, $\gamma$, molecular weight.
-3. **Subscale motor firings**: 1–5 static tests of small motors with known geometry → extract *effective* $a$, $n$ and $\eta_{c*}$ via curve-matching or analytical inversion (e.g., log-log plot of $P_c$ vs. $K_n$ gives slope = $n/(1-n)$).
-4. **Full-scale validation**: One or more full-motor static tests → final anchoring and statistical uncertainty quantification.
-5. **Sensitivity studies**: Vary $a$, $n$, initial temperature, etc., to establish performance margins.
+Specific impulse is the most important overall performance metric:
 
-Many modern ballisticians use automated optimization (least-squares fitting of the ODE solution to measured P-t data) rather than manual adjustment. Tools such as openMotor or custom Python scripts with SciPy’s `curve_fit` make this straightforward.
+$$
+I_{sp} = \frac{F}{\dot{m} \, g_0} = \frac{C_F \, c^*}{g_0}
+$$
 
-## Example Implementation
+where \( g_0 = 9.80665 \) m/s².
 
-Python Ballistic prediction code is provided in the GitHub repository, which simulates a simple 0D ballistic model using a web vs. surface area table for burnback geometry. The code integrates the pressure ODE and computes thrust over time, producing plots of chamber pressure and thrust. This example can be adapted to include more complex geometries, non-ideal effects, or to fit static test data for parameter extraction.
+Thus:
 
-```{python}
-#| echo: false
-#| warning: false
-#| message: false
-#| fig-cap: "Chamber pressure and thrust vs. time using web vs. surface area table"
+- \( c^* \) reflects combustion chamber performance
+- \( C_F \) reflects nozzle performance
+- Their product determines delivered \( I_{sp} \)
 
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.interpolate import interp1d
+Typical delivered \( I_{sp} \) for amateur solid motors ranges from 120–250 seconds depending on propellant and nozzle design.
 
-# ================================================================
-# Propellant and motor parameters
-# ================================================================
-rho_p   = 1700.0      # kg/m³
-a       = 0.0006      # burning rate coefficient (m/s / Pa^n)
-n       = 0.35
-c_star  = 1550.0      # m/s
-A_t     = 0.0015       # m²
-V_c0    = 0.0015      # m³
-dt      = 0.001
-t_max   = 5.0
+## Integration into the Ballistics Model
 
-# Grain burnback table: web (m) vs. burning surface area (m²)
-web_table = np.array([0.000, 0.005, 0.010, 0.015, 0.020, 0.025, 0.030])
-Ab_table  = np.array([0.050, 0.052, 0.055, 0.060, 0.058, 0.045, 0.020])
+In the simulator (Chapter 5), once \( P_c(t) \) is known from the ODE solver:
 
-Ab_interp = interp1d(web_table, Ab_table, kind='linear', bounds_error=False, fill_value=0.0)
+1. Compute mass flow: \( \dot{m}(t) = \frac{P_c(t) A_t}{c^*} \)
+2. Compute thrust: \( F(t) = C_F \, P_c(t) \, A_t \)
+3. (Optional) Include ambient pressure correction if \( P_e \neq P_a \)
 
-# Simulation code...
-t_list = []
-P_list = []
-F_list = []
-w = 0.0
-V_c = V_c0
-P = 0.1e6
-t = 0.0
+During tail-off (when web distance reaches maximum), \( A_b \) drops rapidly and thrust decays.
 
-while t < t_max and w < web_table[-1]:
-    A_b = Ab_interp(w)
-    r = a * P**n if P > 0 else 0.0
-    m_gen = rho_p * A_b * r
-    m_out = P * A_t / c_star if P > 0 else 0.0
-    dPdt = (c_star * 300 / V_c) * (m_gen - m_out)
-    P = max(P + dPdt * dt, 0.0)
-    w += r * dt
-    t += dt
-    
-    C_F_approx = 1.55
-    F = P * A_t * C_F_approx
-    
-    t_list.append(t)
-    P_list.append(P / 1e6)
-    F_list.append(F / 1000)
+The total impulse is obtained by integrating thrust over burn time:
 
-# Plot
-fig, ax1 = plt.subplots(figsize=(10, 6))
-ax1.plot(t_list, P_list, color='tab:blue', label='Chamber Pressure')
-ax1.set_xlabel('Time (s)')
-ax1.set_ylabel('Chamber Pressure (MPa)', color='tab:blue')
-ax1.grid(True, alpha=0.3)
+$$
+I_{total} = \int_0^{t_b} F(t) \, dt
+$$
 
-ax2 = ax1.twinx()
-ax2.plot(t_list, F_list, color='tab:red', label='Thrust')
-ax2.set_ylabel('Thrust (kN)', color='tab:red')
+## Key Design Considerations
 
-plt.title('0D Ballistic Prediction with Web vs. Surface Area Table')
-plt.tight_layout()
-plt.show()
+- **Expansion ratio \( \epsilon \)**: Higher \( \epsilon \) increases \( C_F \) (and \( I_{sp} \)) in vacuum but can cause over-expansion and flow separation at sea level.
+- **Throat erosion**: Real nozzles experience some throat enlargement, which decreases \( P_c \) and alters performance. This can be modeled with a time-varying \( A_t \).
+- **Nozzle efficiency losses**: Divergence loss, friction, two-phase flow (for metallized propellants), and non-ideal gas behavior reduce delivered \( C_F \) and \( c^* \) below theoretical values.
+- **Ambient pressure effects**: Motors fired at altitude deliver higher \( I_{sp} \) than at sea level.
 
-print(f"Burn time: {t:.3f} s")
-print(f"Peak pressure: {max(P_list):.2f} MPa")
-print(f"Peak thrust: {max(F_list):.1f} kN")
-```
+## Summary
+
+The nozzle transforms chamber conditions into thrust via two fundamental parameters:
+
+- \( c^* \): propellant combustion figure of merit
+- \( C_F \): nozzle expansion figure of merit
+
+Together they give:
+
+$$
+F(t) = C_F \, P_c(t) \, A_t \qquad \text{and} \qquad I_{sp} = \frac{C_F \, c^*}{g_0}
+$$
+
+With \( P_c(t) \) from the internal ballistics solver and \( A_b(w) \) from the burnback model, we can now generate complete pressure-time and thrust-time curves for any grain geometry and propellant combination.
+
+In the next chapter we will address the **ignition transient** — the rapid pressurization phase from igniter activation until steady burning is established.
+
+## References
+
+- Sutton, G. P., & Biblarz, O. (2017). *Rocket Propulsion Elements* (9th ed.).
+- Greatrix, D. R. (2012). *Powered Flight – The Engineering of Aerospace Propulsion*.
+- Nakka, R. Solid Rocket Motor Theory pages (characteristic velocity and thrust coefficient sections).
+- NASA Glenn Research Center Rocket Propulsion Basics.
+
+:::{.callout-note}
+The Python implementation in `code/thermo.py` and `code/simulator.py` includes functions to compute \( c^* \), \( C_F \), and thrust from propellant properties (\( \gamma \), \( T_c \), \( \epsilon \)) and instantaneous chamber pressure. Examples will demonstrate sea-level vs. vacuum performance.
+:::

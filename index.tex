@@ -1,0 +1,1690 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Solid Rocket Internal Ballistics},
+  pdfauthor={Troy Altus},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Solid Rocket Internal Ballistics}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Theory ⋅ Equations ⋅ Numerical Simulation}
+\author{Troy Altus}
+\date{2026-04-05}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\bookmarksetup{startatroot}
+
+\chapter*{}\label{section}
+
+\markboth{}{}
+
+This ebook covers the internal ballistics of solid propellant rocket
+motors, with emphasis on performance modeling, grain design, and static
+test anchoring.
+
+\bookmarksetup{startatroot}
+
+\chapter*{Preface}\label{preface}
+
+\markboth{Preface}{Preface}
+
+Welcome to this ebook on solid rocket internal ballistics. This book is
+intended for students, engineers, and hobbyists interested in
+understanding the fundamental principles governing the performance of
+solid propellant rocket motors. We will cover the key concepts of
+burning rate, Kn ratio, grain design, and performance modeling, with a
+focus on practical applications and computational methods. Whether you
+are designing your first motor or looking to deepen your understanding
+of internal ballistics, this book will provide a solid foundation and
+guide you through the complexities of solid rocket motor behavior. Let's
+get started!
+
+\bookmarksetup{startatroot}
+
+\chapter{Introduction to Solid Rocket Internal
+Ballistics}\label{introduction-to-solid-rocket-internal-ballistics}
+
+Solid rocket motors are widely used in missiles, launch vehicles, and
+amateur rocketry due to their simplicity, reliability, and high
+thrust-to-weight ratio.
+
+\section{What is Internal
+Ballistics?}\label{what-is-internal-ballistics}
+
+Internal ballistics is the study of the processes occurring
+\textbf{inside} the rocket motor from ignition until burnout. It
+includes:
+
+\begin{itemize}
+\tightlist
+\item
+  Ignition and flame spreading
+\item
+  Propellant combustion
+\item
+  Gas generation and pressure buildup
+\item
+  Nozzle flow and thrust generation
+\end{itemize}
+
+\section{Why It Matters}\label{why-it-matters}
+
+Accurate internal ballistics modeling allows engineers to: - Predict
+pressure-time curves - Optimize grain geometry - Ensure structural
+integrity - Maximize performance and safety
+
+This book focuses on the theoretical foundations and practical
+computational methods used in solid rocket motor design.
+
+\bookmarksetup{startatroot}
+
+\chapter{Solid Propellants}\label{solid-propellants}
+
+\section{Introduction}\label{introduction}
+
+Solid propellants are energetic materials that contain both fuel and
+oxidizer in a solid matrix. They are the heart of solid rocket motors,
+providing the chemical energy converted into thrust.
+
+\section{Classification of Solid
+Propellants}\label{classification-of-solid-propellants}
+
+\subsection{Double-Base Propellants}\label{double-base-propellants}
+
+\begin{itemize}
+\tightlist
+\item
+  Composed primarily of nitrocellulose and nitroglycerin
+\item
+  Homogeneous (uniform composition)
+\item
+  Common in older tactical missiles
+\end{itemize}
+
+\subsection{Composite Propellants}\label{composite-propellants}
+
+\begin{itemize}
+\tightlist
+\item
+  Most widely used today
+\item
+  Heterogeneous: oxidizer crystals (usually AP --- ammonium perchlorate)
+  suspended in a fuel binder (HTPB, PBAN, etc.)
+\item
+  Higher performance and better mechanical properties
+\end{itemize}
+
+\subsection{Composite Modified Double-Base
+(CMDB)}\label{composite-modified-double-base-cmdb}
+
+\begin{itemize}
+\tightlist
+\item
+  Hybrid of the two above
+\end{itemize}
+
+\section{Key Ingredients}\label{key-ingredients}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Oxidizer}: Ammonium Perchlorate (AP), Ammonium Nitrate (AN)
+\item
+  \textbf{Fuel/Binder}: Hydroxyl-terminated polybutadiene (HTPB),
+  Polybutadiene acrylonitrile (PBAN)
+\item
+  \textbf{Metal Fuel}: Aluminum powder (increases specific impulse and
+  density)
+\item
+  \textbf{Burn Rate Modifiers}: Iron oxide, copper chromite
+\item
+  \textbf{Plasticizers and Curatives}
+\end{itemize}
+
+\section{Important Properties}\label{important-properties}
+
+\begin{itemize}
+\tightlist
+\item
+  Burning rate (typically 5--25 mm/s at 70 bar)
+\item
+  Pressure exponent (\texttt{n} in Saint-Robert's law: \(r = a P^n\))
+\item
+  Density
+\item
+  Mechanical properties (tensile strength, elongation)
+\item
+  Sensitivity (shock, friction, thermal)
+\end{itemize}
+
+\section{Burning Rate Law (Vieille's / Saint-Robert's
+Law)}\label{burning-rate-law-vieilles-saint-roberts-law}
+
+\[
+r = a P^n
+\]
+
+Where: - \(r\) = linear burning rate (mm/s) - \(P\) = chamber pressure
+(bar or MPa) - \(a\) = burn rate coefficient (pressure and temperature
+dependent) - \(n\) = pressure exponent (usually 0.2 -- 0.7)
+
+\section{Next Steps}\label{next-steps}
+
+In the following chapters we will explore how propellant properties,
+grain geometry, and nozzle design interact to determine the internal
+ballistics behavior of a solid rocket motor.
+
+\bookmarksetup{startatroot}
+
+\chapter{Grain Design and Geometry}\label{grain-design-and-geometry}
+
+\section{Introduction}\label{introduction-1}
+
+Grain design is one of the most critical aspects of solid rocket motor
+performance. The shape of the propellant grain controls how the burning
+surface area evolves over time, which directly determines the thrust
+profile of the motor.
+
+\section{Key Concepts}\label{key-concepts}
+
+\subsection{Web Thickness}\label{web-thickness}
+
+The \textbf{web thickness} is the minimum distance the burning surface
+must regress before the grain is fully consumed.
+
+\subsection{\texorpdfstring{Burning Surface Area
+\(A_b(t)\)}{Burning Surface Area A\_b(t)}}\label{burning-surface-area-a_bt}
+
+The evolution of burning surface area is the core variable in grain
+design:
+
+\[
+A_b(t) = f(\text{grain geometry}, \text{web distance burned})
+\]
+
+Grain geometries produce three main burning behaviors: -
+\textbf{Neutral}: Roughly constant thrust - \textbf{Progressive}: Thrust
+increases with time - \textbf{Regressive}: Thrust decreases with time
+
+\section{Common Grain Geometries}\label{common-grain-geometries}
+
+\begin{itemize}
+\tightlist
+\item
+  Cylindrical (core-burning)
+\item
+  Star grains
+\item
+  Finocyl (fin-in-cylinder)
+\item
+  Wagon wheel / dendrite
+\item
+  Conical and tapered grains
+\end{itemize}
+
+\section{Important Design Parameters}\label{important-design-parameters}
+
+\begin{itemize}
+\tightlist
+\item
+  Kn ratio (\(K_n = A_b / A_t\))
+\item
+  Volumetric loading fraction
+\item
+  Length-to-diameter (L/D) ratio
+\item
+  Sliver fraction (unburned propellant at burnout)
+\end{itemize}
+
+\section{Link to Internal Ballistics}\label{link-to-internal-ballistics}
+
+Grain geometry combined with burning rate laws determines the
+pressure-time curve. A well-designed grain allows engineers to tailor
+thrust profiles for specific missions.
+
+The next chapter explores the detailed equations of internal ballistics.
+
+\bookmarksetup{startatroot}
+
+\chapter{Burn Surface Regression and Grain
+Burnback}\label{burn-surface-regression-and-grain-burnback}
+
+\bookmarksetup{startatroot}
+
+\chapter{Burn Surface Regression and Grain Burnback
+Simulation}\label{burn-surface-regression-and-grain-burnback-simulation}
+
+\section{Why Burnback Simulation
+Matters}\label{why-burnback-simulation-matters}
+
+The propellant grain geometry determines how the burning surface evolves
+over time. Accurate modeling of this \textbf{burnback} (surface
+regression) is essential for predicting realistic chamber pressure-time
+(\(P\)-\(t\)) and thrust-time curves.
+
+Simple analytical models work well for basic shapes such as cylindrical
+core burners or end-burners. However, modern rocket motors often use
+complex geometries --- star, finocyl, wagon-wheel, dendrite, or slotted
+grains --- that require numerical burnback simulation.
+
+\section{Core Concept: Web Distance}\label{core-concept-web-distance}
+
+As the propellant burns, the burning surface moves \textbf{inward},
+perpendicular to itself, by a distance called the \textbf{web} (\(w\)).
+
+The instantaneous burning surface area \(A_b\) is a function of the web
+distance burned:
+
+\[
+A_b(w) = f(\text{initial grain geometry}, w)
+\]
+
+Burnout occurs when the web distance \(w\) reaches the maximum web
+thickness of the grain.
+
+\section{Burnback Modeling
+Approaches}\label{burnback-modeling-approaches}
+
+\subsection{1. Analytical Methods (Fast but
+Limited)}\label{analytical-methods-fast-but-limited}
+
+Suitable for simple geometries:
+
+\begin{itemize}
+\tightlist
+\item
+  Internal-burning cylinder
+\item
+  External-burning cylinder
+\item
+  End-burner (cigarette grain)
+\item
+  Simple conical or tapered grains
+\end{itemize}
+
+These use closed-form equations but break down quickly for complex
+ports.
+
+\subsection{2. Numerical / Geometric Burnback (General
+Purpose)}\label{numerical-geometric-burnback-general-purpose}
+
+For arbitrary grain shapes, the standard techniques are:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Minimum Distance Function (MDF)} method
+\item
+  \textbf{Level-set} methods
+\item
+  Polygon offsetting (using libraries such as \texttt{shapely} in
+  Python)
+\item
+  Voxel-based or grid-based regression
+\item
+  CAD-based parametric slicing
+\end{itemize}
+
+For most amateur, experimental, and small-motor work, a \textbf{2D
+cross-sectional + axial slicing} approach (Ballistic Element Analysis)
+offers an excellent balance of accuracy and speed.
+
+\section{How Ballistic Element Analysis
+Works}\label{how-ballistic-element-analysis-works}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Slice the grain into many thin axial elements of thickness
+  \(\Delta x\).
+\item
+  For each slice, compute the 2-D burning perimeter \(P_b(w)\) as a
+  function of web distance.
+\item
+  Sum the contributions:
+\end{enumerate}
+
+\[
+A_b(w) = \sum_{i=1}^{N} P_{b,i}(w) \cdot \Delta x
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Simultaneously track the free chamber volume \(V_c(w)\) by subtracting
+  burned propellant volume.
+\end{enumerate}
+
+This produces high-resolution tables of \(A_b(w)\) and \(V_c(w)\) that
+are fed directly into the 0D lumped-parameter ballistic solver.
+
+\section{Pseudocode: Basic Burnback + Ballistic
+Coupling}\label{pseudocode-basic-burnback-ballistic-coupling}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{chapters/04-burnback-simulation_files/figure-pdf/cell-2-output-1.pdf}}
+
+}
+
+\caption{Example of burning surface area evolution during grain
+burnback}
+
+\end{figure}%
+
+\bookmarksetup{startatroot}
+
+\chapter{Internal Ballistics}\label{internal-ballistics}
+
+0D Modeling of Chamber Pressure and Thrust-Time Evolution
+
+\hfill\break
+
+\section{Introduction}\label{introduction-2}
+
+Having defined propellant properties (Chapter 2), grain geometry
+(Chapter 3), and how the burning surface evolves with web distance
+(Chapter 4 --- burnback), we now combine these to predict the
+time-dependent behavior of a solid rocket motor.
+
+This chapter introduces the \textbf{zero-dimensional (0D) internal
+ballistics model} --- the standard engineering approach for preliminary
+design and performance prediction. It assumes spatially uniform pressure
+and temperature inside the combustion chamber.
+
+\section{Mass Balance in the Combustion
+Chamber}\label{mass-balance-in-the-combustion-chamber}
+
+The foundation is conservation of mass:
+
+\[
+\frac{dm_c}{dt} = \dot{m}_\text{gen} - \dot{m}_\text{out}
+\]
+
+where: - ( m\_c ): mass of combustion products in the chamber (kg) - (
+\dot{m}\_\text{gen} = \rho\emph{p A\_b(t) r(P\_c) ): mass generation
+rate from propellant burning - ( \dot{m}}\text{out} ): mass expulsion
+rate through the nozzle - ( \rho\_p ): propellant density (kg/m³) - (
+A\_b(t) ): instantaneous burning surface area (m²) from burnback - (
+r(P\_c) ): linear burn rate (m/s)
+
+\section{Burn Rate Law (Vieille's
+Law)}\label{burn-rate-law-vieilles-law}
+
+The propellant regression rate is described by:
+
+\[
+r(P_c) = a P_c^n
+\]
+
+where: - ( a ): burn rate coefficient - ( n ): pressure exponent
+(typically 0.2--0.7 for stable motors) - ( P\_c ): chamber pressure
+
+A temperature-sensitive form is often used:
+
+\[
+a(T_i) = a_\text{ref} \left[1 + \sigma_p (T_i - T_\text{ref})\right]
+\]
+
+\section{Nozzle Mass Flow Rate}\label{nozzle-mass-flow-rate}
+
+For choked nozzle flow:
+
+\[
+\dot{m}_\text{out} = \frac{P_c A_t}{c^*}
+\]
+
+where ( A\_t ) is the throat area and ( c\^{}* ) is the characteristic
+velocity of the propellant.
+
+\section{Governing Differential
+Equation}\label{governing-differential-equation}
+
+Substituting and simplifying yields the core 0D ODE for chamber
+pressure:
+
+\[
+\frac{V_c}{c^{*2}} \frac{dP_c}{dt} = \rho_p A_b(w) r(P_c) - \frac{P_c A_t}{c^*}
+\]
+
+In practice we solve the coupled system for ( P\_c(t) ) and web distance
+( w(t) ), with ( A\_b(w) ) supplied by the burnback module and numerical
+integration (e.g., \texttt{scipy.integrate.solve\_ivp}).
+
+\section{Key Assumptions}\label{key-assumptions}
+
+\begin{itemize}
+\tightlist
+\item
+  Uniform chamber pressure and temperature (lumped parameter)
+\item
+  Constant propellant density and ( c\^{}* )
+\item
+  Negligible erosive burning and ignition transients (added in later
+  chapters)
+\end{itemize}
+
+\section{Summary}\label{summary}
+
+This chapter establishes the fundamental differential equations linking
+grain regression to motor performance. The next chapter explores the K/N
+ratio and equilibrium pressure in greater depth.
+
+\section{References}\label{references}
+
+\begin{itemize}
+\tightlist
+\item
+  Sutton, G. P., \& Biblarz, O. (2017). \emph{Rocket Propulsion
+  Elements} (9th ed.). Wiley.
+\item
+  Greatrix, D. R. (2012). \emph{Powered Flight -- The Engineering of
+  Aerospace Propulsion}. Springer.
+\item
+  Zucrow, M. J., \& Hoffman, J. D. (1976). \emph{Gas Dynamics} (Vol. 1).
+  Wiley.
+\item
+  Wimpress, R. N. (1950). \emph{Internal Ballistics of Solid-Fuel
+  Rockets}. McGraw-Hill.
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Executable Python implementations and example simulations are provided
+in the \texttt{code/} directory.
+
+\end{tcolorbox}
+
+\bookmarksetup{startatroot}
+
+\chapter{Burning Rate and K/N Ratio}\label{burning-rate-and-kn-ratio}
+
+Equilibrium Pressure, Stability, and Motor Ballistic Behavior
+
+\hfill\break
+
+\section{Introduction}\label{introduction-3}
+
+In Chapter 5 we derived the governing differential equation for chamber
+pressure evolution using mass conservation. At any instant, the chamber
+pressure is determined by the balance between \textbf{mass generation}
+from the burning propellant surface and \textbf{mass discharge} through
+the nozzle.
+
+When the time derivative of pressure is zero (( \frac{dP_c}{dt}
+\approx 0 )), the motor operates at \textbf{equilibrium pressure}. This
+condition dominates most of the burn duration in well-designed motors
+and is controlled primarily by two quantities:
+
+\begin{itemize}
+\tightlist
+\item
+  The propellant \textbf{burn rate law}
+\item
+  The \textbf{K/N ratio} (( K\_n = A\_b / A\_t )), the ratio of burning
+  surface area to nozzle throat area
+\end{itemize}
+
+This chapter explores these relationships in detail, their implications
+for motor stability, pressure sensitivity, and how grain geometry (via
+burnback) shapes the pressure-time and thrust-time curves.
+
+\section{Vieille's Law (Saint-Robert's
+Law)}\label{vieilles-law-saint-roberts-law}
+
+The linear burn rate ( r ) of most solid propellants follows the
+empirical power-law relationship known as \textbf{Vieille's law}:
+
+\[
+r(P_c) = a \, P_c^n
+\]
+
+where: - ( r ): linear burn (regression) rate (m/s or mm/s) - ( a ):
+burn rate coefficient (units depend on pressure units, e.g., m/s·Paⁿ) -
+( n ): dimensionless pressure exponent (typically 0.2--0.7 for stable
+rocket propellants) - ( P\_c ): chamber pressure (usually expressed in
+MPa or Pa)
+
+The coefficient ( a ) is moderately sensitive to the initial propellant
+temperature ( T\_i ):
+
+\[
+a(T_i) = a_\text{ref} \left[1 + \sigma_p (T_i - T_\text{ref})\right]
+\]
+
+where ( \sigma\_p ) is the temperature sensitivity of burn rate
+(typically 0.1--0.3 \%/K).
+
+A propellant is considered \textbf{ballistically stable} only when ( n
+\textless{} 1 ). If ( n \geq 1 ), small pressure perturbations can cause
+runaway pressure increase, often leading to motor explosion.
+
+\section{Definition of K/N Ratio}\label{definition-of-kn-ratio}
+
+The \textbf{K/N ratio} (commonly written ( K\_n ) or simply ( K )) is
+defined as:
+
+\[
+K_n = \frac{A_b}{A_t}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  ( A\_b ): instantaneous burning surface area (m²), obtained from the
+  burnback model (Chapter 4)
+\item
+  ( A\_t ): nozzle throat area (m²), a fixed design parameter
+\end{itemize}
+
+( K\_n ) is one of the most important design parameters in solid rocket
+motors. It directly controls the operating pressure level. Typical
+values for amateur and experimental motors range from 100 to 400,
+depending on propellant and desired pressure.
+
+\section{Equilibrium Pressure
+Derivation}\label{equilibrium-pressure-derivation}
+
+At steady state, mass generation equals mass outflow:
+
+\[
+\dot{m}_\text{gen} = \dot{m}_\text{out}
+\]
+
+\[
+\rho_p \, A_b \, r(P_c) = \frac{P_c A_t}{c^*}
+\]
+
+Substitute Vieille's law ( r = a P\_c\^{}n ):
+
+\[
+\rho_p \, A_b \, a \, P_c^n = \frac{P_c A_t}{c^*}
+\]
+
+Rearrange:
+
+\[
+\rho_p \, a \, c^* \, \left( \frac{A_b}{A_t} \right) = P_c^{1-n}
+\]
+
+\[
+P_{eq} = \left( \rho_p \, a \, c^* \, K_n \right)^{\frac{1}{1-n}}
+\]
+
+This is the \textbf{equilibrium chamber pressure}. It shows that:
+
+\begin{itemize}
+\tightlist
+\item
+  Pressure scales strongly with ( K\_n ) because of the exponent (
+  1/(1-n) ) (often 1.25--3.3).
+\item
+  Doubling ( K\_n ) typically increases pressure by a factor of
+  \textasciitilde2.5--3 or more, depending on ( n ).
+\item
+  Higher ( n ) makes pressure much more sensitive to changes in ( K\_n
+  ).
+\end{itemize}
+
+\section{K/N Curve and Pressure-Time
+Profile}\label{kn-curve-and-pressure-time-profile}
+
+As the grain burns, ( A\_b ) evolves according to the burnback geometry.
+Plotting ( K\_n(w) ) versus web distance (or time) produces the
+\textbf{K/N curve}.
+
+The shape of this curve determines the ballistic classification of the
+motor:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Neutral} --- ( K\_n ) roughly constant → nearly constant
+  pressure and thrust (desired for many applications)
+\item
+  \textbf{Progressive} --- ( K\_n ) increases with time → rising
+  pressure/thrust
+\item
+  \textbf{Regressive} --- ( K\_n ) decreases with time → falling
+  pressure/thrust
+\item
+  \textbf{Progressive-regressive} (e.g., many star or finocyl grains)
+  --- initial rise followed by a drop
+\end{itemize}
+
+Because ( P\_\{eq\} \propto K\_n\^{}\{1/(1-n)\} ), even modest changes
+in ( K\_n ) produce noticeable changes in pressure. Grain designers
+therefore carefully tailor the geometry so the K/N curve yields the
+desired thrust profile.
+
+\section{Stability Considerations}\label{stability-considerations}
+
+For stable operation, two conditions must be satisfied:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ( n \textless{} 1 ) (inherent propellant property)
+\item
+  The operating point must lie on the stable intersection of the mass
+  generation curve (( \dot{m}\emph{\text{gen} \propto P\^{}n )) and the
+  mass discharge curve (( \dot{m}}\text{out} \propto P ))
+\end{enumerate}
+
+If ( n \textgreater{} 1 ), the mass generation curve becomes steeper
+than the discharge curve, and any small positive pressure perturbation
+causes further increase --- unstable.
+
+Temperature sensitivity also plays a role. The temperature sensitivity
+of chamber pressure ( \pi\_K ) is related to the burn rate temperature
+sensitivity ( \sigma\_p ) by:
+
+\[
+\pi_K = \frac{\sigma_p}{1 - n}
+\]
+
+This explains why motors with higher ( n ) are more sensitive to ambient
+temperature changes.
+
+\section{Practical Design
+Implications}\label{practical-design-implications}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Choosing ( n )}: Lower ( n ) gives more stable, less
+  temperature-sensitive motors but can make it harder to achieve high
+  thrust.
+\item
+  \textbf{Choosing ( K\_n )}: Higher ( K\_n ) gives higher operating
+  pressure (and usually higher thrust and specific impulse) but
+  increases structural loads and erosive burning risk.
+\item
+  \textbf{Grain geometry}: The burnback module (Chapter 4) must provide
+  accurate ( A\_b(w) ) so the resulting ( K\_n(t) ) produces the target
+  pressure curve.
+\item
+  \textbf{Nozzle sizing}: Once the desired average pressure and
+  propellant are chosen, ( A\_t ) is sized to achieve the target ( K\_n
+  ).
+\end{itemize}
+
+In the accompanying simulation code, we compute equilibrium pressure
+analytically when possible, but solve the full transient ODE numerically
+to capture ignition, tail-off, and deviations caused by changing ( A\_b
+).
+
+\section{Summary}\label{summary-1}
+
+The interplay between the burn rate law ( r = a P\^{}n ) and the K/N
+ratio ( K\_n = A\_b / A\_t ) determines the equilibrium chamber pressure
+via:
+
+\[
+P_{eq} = \left( \rho_p \, a \, c^* \, K_n \right)^{\frac{1}{1-n}}
+\]
+
+Understanding and controlling the K/N curve through grain geometry is
+one of the most powerful tools available to the motor designer for
+shaping thrust-time performance.
+
+In the next chapter we will introduce erosive burning corrections, which
+become important when high port velocities alter the effective burn rate
+beyond the simple pressure dependence.
+
+\section{References}\label{references-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Sutton, G. P., \& Biblarz, O. (2017). \emph{Rocket Propulsion
+  Elements}.
+\item
+  Greatrix, D. R. (2012). \emph{Powered Flight -- The Engineering of
+  Aerospace Propulsion}.
+\item
+  Nakka, R. (various). Solid Rocket Motor Design Resources.
+\item
+  Kubota, N. (2004). Principles of Solid Rocket Motor Design.
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Executable examples showing K/N curve generation from different grain
+geometries and the resulting pressure-time traces are available in the
+\texttt{examples/} and \texttt{code/} directories.
+
+\end{tcolorbox}
+
+\bookmarksetup{startatroot}
+
+\chapter{Erosive Burning}\label{erosive-burning}
+
+Effects of High Port Velocity on Burning Rate
+
+\hfill\break
+
+\section{Introduction}\label{introduction-4}
+
+In the standard 0D internal ballistics model presented in Chapters 5 and
+6, the burning rate depends only on chamber pressure (and initial
+temperature) through Vieille's law: ( r = a P\^{}n ).
+
+However, in many real motors --- especially those with high
+length-to-diameter (L/D) ratios, narrow ports, or high mass flux --- the
+hot combustion gases flowing parallel to the burning surface can
+significantly \textbf{increase} the local burning rate. This phenomenon
+is called \textbf{erosive burning}.
+
+Erosive burning is most pronounced near the aft end of the grain, where
+the core flow velocity (and thus mass flux) is highest due to cumulative
+mass addition from upstream burning surfaces. It can lead to:
+
+\begin{itemize}
+\tightlist
+\item
+  Higher-than-predicted chamber pressure
+\item
+  Altered thrust-time profile (often more progressive)
+\item
+  Increased risk of pressure spikes or structural failure
+\item
+  Uneven web burnout and potential slag or residue issues
+\end{itemize}
+
+This chapter introduces the physical mechanism behind erosive burning
+and presents the most widely used engineering model: the
+\textbf{Lenoir-Robillard correlation}.
+
+\section{Physical Mechanism}\label{physical-mechanism}
+
+Erosive burning is primarily a \textbf{heat transfer} phenomenon. In
+normal (non-erosive) combustion:
+
+\begin{itemize}
+\tightlist
+\item
+  Heat feedback to the propellant surface comes mainly from the thin
+  primary combustion zone (flame) just above the surface via conduction,
+  convection, and radiation.
+\item
+  The burning rate is limited by how quickly the propellant reaches
+  ignition temperature.
+\end{itemize}
+
+When high-velocity combustion products flow parallel to the surface:
+
+\begin{itemize}
+\tightlist
+\item
+  The boundary layer is thinned or disrupted.
+\item
+  Convective heat transfer coefficient increases.
+\item
+  More heat is transferred to the propellant surface per unit time.
+\item
+  The propellant pyrolyzes and burns faster.
+\end{itemize}
+
+This effect becomes noticeable only above a certain \textbf{threshold
+velocity} or mass flux, below which the normal pressure-dependent
+burning dominates.
+
+\section{Lenoir-Robillard Model}\label{lenoir-robillard-model}
+
+The most common and practical engineering model for erosive burning was
+proposed by Lenoir and Robillard (1957). It expresses the \textbf{total
+burning rate} ( r ) as the sum of two contributions:
+
+\[
+r = r_0 + r_e
+\]
+
+where: - ( r\_0 = a P\_c\^{}n ): the normal (pressure-dependent) burning
+rate - ( r\_e ): the additional erosive burning rate
+
+The erosive component is given by:
+
+\[
+r_e = \alpha \, G^{0.8} \, D^{-0.2} \, \exp\left( -\beta \frac{\rho_p r}{G} \right)
+\]
+
+or in the commonly simplified form used in many codes:
+
+\[
+r_e = \frac{\alpha \, G^{0.8}}{D^{0.2}} \exp\left( - \frac{\beta \rho_p r}{G} \right)
+\]
+
+where: - ( G = \frac{\dot{m}}{A_p} ): local mass flux in the port
+(kg/m²·s), with ( A\_p ) the port area - ( D ): hydraulic diameter of
+the port (m) - ( \rho\_p ): propellant density (kg/m³) - ( \alpha,
+\beta ): empirical constants specific to the propellant (determined from
+experiments)
+
+The exponential term represents the \textbf{blowing effect} --- the
+outward flow of pyrolysis gases from the burning surface reduces the
+effectiveness of the convective heat transfer (transpiration cooling).
+At very high burning rates or low mass flux, this term suppresses
+erosive burning.
+
+Many implementations use a \textbf{threshold} below which ( r\_e = 0 ):
+
+\[
+r_e = 
+\begin{cases}
+0 & \text{if } G < G_{\text{threshold}} \\
+\text{formula above} & \text{otherwise}
+\end{cases}
+\]
+
+\section{Implementation in the 0D
+Model}\label{implementation-in-the-0d-model}
+
+When erosive burning is included, the burn rate in the governing ODE
+(Chapter 5) becomes position- and time-dependent:
+
+\[
+r(x, t) = a P_c^n + r_e(G(x, t))
+\]
+
+where ( G(x, t) = \frac{\dot{m}(x, t)}{A_p(x, t)} ) and ( \dot{m}(x, t)
+) is the cumulative mass flow from the head end up to axial position ( x
+).
+
+This turns the simple lumped 0D model into a \textbf{quasi-1D} model,
+requiring integration along the grain length (or at least several
+ballistic elements).
+
+In practice, for preliminary design:
+
+\begin{itemize}
+\tightlist
+\item
+  Compute local ( G ) using the current port area from burnback.
+\item
+  Apply the Lenoir-Robillard correction locally.
+\item
+  Average or integrate to update the effective ( A\_b r ) term in the
+  mass balance.
+\end{itemize}
+
+\section{Design Implications and
+Mitigation}\label{design-implications-and-mitigation}
+
+Erosive burning is more severe when:
+
+\begin{itemize}
+\tightlist
+\item
+  Port area is small relative to throat area (high ( K\_n ))
+\item
+  Grain is long and narrow (high L/D)
+\item
+  Propellant has low burn rate (small ( a ) or ( n ))
+\item
+  High chamber pressure is targeted
+\end{itemize}
+
+Common mitigation strategies include:
+
+\begin{itemize}
+\tightlist
+\item
+  Increasing initial port diameter or using progressive geometries
+  (star, finocyl) that open up quickly
+\item
+  Designing for lower average ( K\_n )
+\item
+  Using propellants with higher burn rate or lower erosive sensitivity
+  (different ( \alpha, \beta ))
+\item
+  Adding inhibitors or shaping the grain to reduce aft-end velocities
+\item
+  Accepting some erosive burning and accounting for it in simulations
+\end{itemize}
+
+In extreme cases, erosive burning can cause the aft end of the grain to
+burn through prematurely, leading to nozzle erosion or case overheating.
+
+\section{Summary}\label{summary-2}
+
+Erosive burning augments the normal pressure-dependent burn rate due to
+enhanced convective heat transfer from high-velocity core flow. The
+Lenoir-Robillard model provides a practical semi-empirical way to
+include this effect:
+
+\[
+r = a P^n + \frac{\alpha G^{0.8}}{D^{0.2}} \exp\left( -\beta \frac{\rho_p r}{G} \right)
+\]
+
+Incorporating erosive burning improves the accuracy of pressure-time
+predictions, especially for high-performance or high L/D motors. It is
+typically added after the basic 0D model is working and validated
+against non-erosive cases.
+
+In the next chapter we will examine \textbf{ignition transients}, the
+initial pressurization phase that occurs before steady-state burning is
+established.
+
+\section{References}\label{references-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Lenoir, J. M., \& Robillard, G. (1957). A Mathematical Method to
+  Predict the Effects of Erosive Burning in Solid Propellant Rockets.
+  \emph{Sixth Symposium (International) on Combustion}.
+\item
+  Sutton, G. P., \& Biblarz, O. (2017). \emph{Rocket Propulsion
+  Elements}.
+\item
+  Greatrix, D. R. (2012). \emph{Powered Flight -- The Engineering of
+  Aerospace Propulsion}.
+\item
+  Nakka, R. Solid Rocket Motor Design Resources (practical
+  implementation notes).
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+The Python implementation in \texttt{code/simulator.py} will include an
+optional \texttt{erosive=True} flag that applies a Lenoir-Robillard
+correction based on local mass flux. Propellant-specific ( \alpha ) and
+( \beta ) values will be stored in the propellant database.
+
+\end{tcolorbox}
+
+\bookmarksetup{startatroot}
+
+\chapter{Nozzle Flow and Thrust}\label{nozzle-flow-and-thrust}
+
+Characteristic Velocity, Thrust Coefficient, and Motor Performance
+
+\hfill\break
+
+\section{Introduction}\label{introduction-5}
+
+Chapters 5--7 focused on the combustion chamber: mass generation from
+the propellant grain, burn rate laws, equilibrium pressure via the K/N
+ratio, and corrections such as erosive burning.
+
+Now we turn to the \textbf{nozzle}, which converts the high-pressure,
+high-temperature combustion gases into high-velocity exhaust, producing
+thrust.
+
+This chapter covers the key nozzle relations used in internal
+ballistics:
+
+\begin{itemize}
+\tightlist
+\item
+  Characteristic velocity ( c\^{}* ) (a measure of propellant combustion
+  efficiency)
+\item
+  Thrust coefficient ( C\_F ) (a measure of nozzle expansion efficiency)
+\item
+  The overall thrust equation
+\item
+  Specific impulse ( I\_\{sp\} )
+\end{itemize}
+
+These quantities allow us to convert chamber pressure ( P\_c(t) ) and
+mass flow rate directly into thrust ( F(t) ).
+
+\section{Characteristic Velocity ( c\^{}*
+)}\label{characteristic-velocity-c}
+
+The \textbf{characteristic velocity} ( c\^{}* ) is a propellant property
+that quantifies the efficiency of the combustion process and the
+conversion of thermal energy into directed flow at the throat. It is
+independent of the nozzle expansion ratio.
+
+It is defined as:
+
+\[
+c^* = \frac{P_c A_t}{\dot{m}}
+\]
+
+where: - ( P\_c ): chamber pressure (Pa) - ( A\_t ): nozzle throat area
+(m²) - ( \dot{m} ): mass flow rate through the nozzle (kg/s)
+
+For an ideal gas with isentropic choked flow at the throat, the
+theoretical ( c\^{}* ) is:
+
+\[
+c^* = \sqrt{ \frac{R T_c}{\gamma} } \left( \frac{\gamma + 1}{2} \right)^{\frac{\gamma + 1}{2(\gamma - 1)}} \frac{1}{\Gamma(\gamma)}
+\]
+
+or more commonly expressed using the gamma function form:
+
+\[
+c^* = \frac{\sqrt{\gamma R T_c}}{\gamma} \left( \frac{\gamma + 1}{2} \right)^{\frac{\gamma + 1}{2(\gamma - 1)}}
+\]
+
+where: - ( \gamma ): ratio of specific heats of the combustion products
+- ( R ): specific gas constant (J/kg·K) - ( T\_c ): chamber (stagnation)
+temperature (K)
+
+In practice, ( c\^{}* ) values for solid propellants are obtained from
+thermochemical equilibrium codes (CEA, RPA, etc.) and stored in the
+propellant database. Typical values range from 1400--1800 m/s for
+amateur propellants (e.g., KNSB, APCP).
+
+\section{Thrust Equation}\label{thrust-equation}
+
+The instantaneous thrust produced by the motor is:
+
+\[
+F = \dot{m} \, v_e + (P_e - P_a) A_e
+\]
+
+where: - ( v\_e ): effective exhaust velocity at the nozzle exit - (
+P\_e ): exit plane pressure - ( P\_a ): ambient pressure - ( A\_e ):
+nozzle exit area
+
+For choked flow, ( \dot{m} = \frac{P_c A_t}{c^*} ). Substituting and
+rearranging yields the very useful form:
+
+\[
+F = C_F \, P_c \, A_t
+\]
+
+where ( C\_F ) is the \textbf{thrust coefficient}.
+
+\section{Thrust Coefficient ( C\_F )}\label{thrust-coefficient-c_f}
+
+The thrust coefficient is a dimensionless parameter that captures the
+efficiency of the nozzle expansion process. For an ideally expanded
+nozzle (( P\_e = P\_a )) it depends primarily on ( \gamma ) and the
+expansion ratio ( \epsilon = A\_e / A\_t ).
+
+The ideal thrust coefficient is:
+
+\[
+C_F = \sqrt{ \frac{2 \gamma^2}{\gamma - 1} \left( \frac{2}{\gamma + 1} \right)^{\frac{\gamma + 1}{\gamma - 1}} \left[ 1 - \left( \frac{P_e}{P_c} \right)^{\frac{\gamma - 1}{\gamma}} \right] } + \left( \frac{P_e}{P_c} - \frac{P_a}{P_c} \right) \epsilon
+\]
+
+In vacuum (( P\_a = 0 )) and for optimum expansion (( P\_e = P\_a )),
+this simplifies significantly.
+
+In the 0D ballistics model, we usually assume a fixed ( C\_F )
+(calculated from design expansion ratio and ( \gamma )) or compute it as
+a weak function of ( P\_c ).
+
+\section{Specific Impulse ( I\_\{sp\} )}\label{specific-impulse-i_sp}
+
+Specific impulse is the most important overall performance metric:
+
+\[
+I_{sp} = \frac{F}{\dot{m} \, g_0} = \frac{C_F \, c^*}{g_0}
+\]
+
+where ( g\_0 = 9.80665 ) m/s².
+
+Thus:
+
+\begin{itemize}
+\tightlist
+\item
+  ( c\^{}* ) reflects combustion chamber performance
+\item
+  ( C\_F ) reflects nozzle performance
+\item
+  Their product determines delivered ( I\_\{sp\} )
+\end{itemize}
+
+Typical delivered ( I\_\{sp\} ) for amateur solid motors ranges from
+120--250 seconds depending on propellant and nozzle design.
+
+\section{Integration into the Ballistics
+Model}\label{integration-into-the-ballistics-model}
+
+In the simulator (Chapter 5), once ( P\_c(t) ) is known from the ODE
+solver:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Compute mass flow: ( \dot{m}(t) = \frac{P_c(t) A_t}{c^*} )
+\item
+  Compute thrust: ( F(t) = C\_F , P\_c(t) , A\_t )
+\item
+  (Optional) Include ambient pressure correction if ( P\_e \neq P\_a )
+\end{enumerate}
+
+During tail-off (when web distance reaches maximum), ( A\_b ) drops
+rapidly and thrust decays.
+
+The total impulse is obtained by integrating thrust over burn time:
+
+\[
+I_{total} = \int_0^{t_b} F(t) \, dt
+\]
+
+\section{Key Design Considerations}\label{key-design-considerations}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Expansion ratio ( \epsilon )}: Higher ( \epsilon ) increases (
+  C\_F ) (and ( I\_\{sp\} )) in vacuum but can cause over-expansion and
+  flow separation at sea level.
+\item
+  \textbf{Throat erosion}: Real nozzles experience some throat
+  enlargement, which decreases ( P\_c ) and alters performance. This can
+  be modeled with a time-varying ( A\_t ).
+\item
+  \textbf{Nozzle efficiency losses}: Divergence loss, friction,
+  two-phase flow (for metallized propellants), and non-ideal gas
+  behavior reduce delivered ( C\_F ) and ( c\^{}* ) below theoretical
+  values.
+\item
+  \textbf{Ambient pressure effects}: Motors fired at altitude deliver
+  higher ( I\_\{sp\} ) than at sea level.
+\end{itemize}
+
+\section{Summary}\label{summary-3}
+
+The nozzle transforms chamber conditions into thrust via two fundamental
+parameters:
+
+\begin{itemize}
+\tightlist
+\item
+  ( c\^{}* ): propellant combustion figure of merit
+\item
+  ( C\_F ): nozzle expansion figure of merit
+\end{itemize}
+
+Together they give:
+
+\[
+F(t) = C_F \, P_c(t) \, A_t \qquad \text{and} \qquad I_{sp} = \frac{C_F \, c^*}{g_0}
+\]
+
+With ( P\_c(t) ) from the internal ballistics solver and ( A\_b(w) )
+from the burnback model, we can now generate complete pressure-time and
+thrust-time curves for any grain geometry and propellant combination.
+
+In the next chapter we will address the \textbf{ignition transient} ---
+the rapid pressurization phase from igniter activation until steady
+burning is established.
+
+\section{References}\label{references-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Sutton, G. P., \& Biblarz, O. (2017). \emph{Rocket Propulsion
+  Elements} (9th ed.).
+\item
+  Greatrix, D. R. (2012). \emph{Powered Flight -- The Engineering of
+  Aerospace Propulsion}.
+\item
+  Nakka, R. Solid Rocket Motor Theory pages (characteristic velocity and
+  thrust coefficient sections).
+\item
+  NASA Glenn Research Center Rocket Propulsion Basics.
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+The Python implementation in \texttt{code/thermo.py} and
+\texttt{code/simulator.py} includes functions to compute ( c\^{}* ), (
+C\_F ), and thrust from propellant properties (( \gamma ), ( T\_c ), (
+\epsilon )) and instantaneous chamber pressure. Examples will
+demonstrate sea-level vs.~vacuum performance.
+
+\end{tcolorbox}
+
+\bookmarksetup{startatroot}
+
+\chapter{Ignition Transient}\label{ignition-transient}
+
+Pressurization Phase, Ignition Delay, Flame Spreading, and Initial
+Pressure Spike
+
+\hfill\break
+
+\section{Introduction}\label{introduction-6}
+
+All previous chapters assumed that steady or quasi-steady burning is
+already established. In reality, every solid rocket motor begins with a
+distinct \textbf{ignition transient} --- the short but critical phase
+between igniter activation and the establishment of stable chamber
+pressure.
+
+During this phase (typically 0.01--0.5 seconds for amateur motors,
+longer for large motors), the chamber pressure rises rapidly from
+ambient to operating level, often overshooting the equilibrium pressure
+before settling. This ``ignition spike'' can stress the case, grain, and
+nozzle, and must be carefully controlled in design.
+
+This chapter describes the physical processes, key stages, and
+simplified modeling approaches for the ignition transient.
+
+\section{Stages of the Ignition
+Transient}\label{stages-of-the-ignition-transient}
+
+The ignition transient is commonly divided into three overlapping
+phases:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Ignition Induction (Delay) Phase}\\
+  The igniter releases hot gases and/or particles into the chamber. Heat
+  is transferred (primarily by convection and radiation) to the
+  propellant surface. No significant propellant burning occurs yet.\\
+  The propellant surface temperature rises until it reaches the
+  \textbf{ignition temperature} ( T\_\{ig\} ) (typically 500--800 K
+  depending on the propellant).\\
+  This phase ends when the first portion of the grain ignites.
+\item
+  \textbf{Flame Spreading Phase}\\
+  Once ignited at one location (usually near the igniter or head end),
+  the flame spreads along the propellant surface.\\
+  Flame spreading is driven by convective heating from the hot gases,
+  enhanced by increasing chamber pressure and flow velocity.\\
+  Erosive effects and local geometry strongly influence the spreading
+  rate.
+\item
+  \textbf{Chamber Filling (Pressurization) Phase}\\
+  As more surface area ignites, mass generation increases rapidly. The
+  chamber fills with combustion products until the mass outflow through
+  the nozzle balances generation.\\
+  Pressure rises sharply, often overshooting the steady-state
+  equilibrium value due to the sudden increase in burning surface before
+  the flow stabilizes.
+\end{enumerate}
+
+After these phases, the motor transitions into the steady ballistic
+phase described in Chapters 5--8.
+
+\section{Igniter Modeling}\label{igniter-modeling}
+
+The igniter is usually modeled as a time-dependent mass and energy
+source:
+
+\[
+\dot{m}_{ig}(t), \quad T_{ig}, \quad \text{or total energy input}
+\]
+
+Simple models assume a constant or triangular igniter mass flow rate for
+a short duration. More advanced models include particle impingement and
+radiative effects.
+
+The heat flux to the propellant surface during induction is dominated by
+convection:
+
+\[
+\dot{q}'' = h (T_g - T_s)
+\]
+
+where ( h ) is the convective heat transfer coefficient (often using
+correlations similar to those in erosive burning models), ( T\_g ) is
+gas temperature, and ( T\_s ) is local surface temperature.
+
+\section{Propellant Heating and Ignition
+Criterion}\label{propellant-heating-and-ignition-criterion}
+
+During the induction phase, the propellant is treated as inert. The
+surface temperature rise is governed by the one-dimensional heat
+conduction equation in the solid phase:
+
+\[
+\rho_p c_p \frac{\partial T}{\partial t} = k \frac{\partial^2 T}{\partial x^2}
+\]
+
+with boundary condition at the surface incorporating the heat flux from
+the igniter gases.
+
+A common practical ignition criterion is:
+
+\begin{itemize}
+\tightlist
+\item
+  The propellant surface reaches a critical ignition temperature (
+  T\_\{ig\} ), or
+\item
+  The integrated energy input reaches a threshold value.
+\end{itemize}
+
+Once ( T\_s \geq T\_\{ig\} ), that surface element begins burning
+according to Vieille's law (possibly with erosive correction).
+
+\section{Simplified 0D Ignition Transient
+Model}\label{simplified-0d-ignition-transient-model}
+
+For engineering purposes in the 0D ballistics simulator, a
+lumped-parameter approach can be used:
+
+\begin{itemize}
+\tightlist
+\item
+  Add igniter mass flow ( \dot{m}\_\{ig\}(t) ) to the mass balance
+  equation.
+\item
+  Delay the start of propellant burning until a computed ignition delay
+  time ( t\_\{ign\} ).
+\item
+  Ramp up the effective burning area ( A\_b(t) ) during flame spreading
+  (e.g., using an exponential or linear ramp function based on grain
+  geometry).
+\end{itemize}
+
+A basic ODE extension during ignition includes the igniter term:
+
+\[
+\frac{V_c}{c^{*2}} \frac{dP_c}{dt} = \rho_p A_b(t) r(P_c) + \dot{m}_{ig}(t) - \frac{P_c A_t}{c^*}
+\]
+
+where ( A\_b(t) ) starts from zero (or a small initial value) and grows
+as flame spreads.
+
+\section{Causes and Control of Ignition
+Spike}\label{causes-and-control-of-ignition-spike}
+
+The initial pressure spike occurs because:
+
+\begin{itemize}
+\tightlist
+\item
+  Flame spreading can ignite a large fraction of the surface almost
+  simultaneously.
+\item
+  The burning surface at ignition may be higher than the steady-state
+  value for some geometries.
+\item
+  Nozzle flow may not yet be fully choked or established.
+\end{itemize}
+
+Design strategies to reduce harmful spikes include:
+
+\begin{itemize}
+\tightlist
+\item
+  Optimized igniter mass flow and energy (not too strong, not too weak)
+\item
+  Grain geometry that promotes controlled flame spreading (e.g.,
+  progressive port opening)
+\item
+  Nozzle throat closure (burst diaphragm) that opens at a designed
+  pressure
+\item
+  Use of ignition aids or inhibitors on parts of the grain
+\end{itemize}
+
+\section{Numerical Considerations}\label{numerical-considerations}
+
+Full-fidelity modeling of ignition transients often requires quasi-1D or
+multi-dimensional CFD with coupled gas and solid phases, flame spreading
+algorithms, and detailed heat transfer. For the purposes of this book
+and the accompanying Python simulator, we use a simplified 0D model with
+an optional ignition delay and flame-spreading function. This provides
+good engineering accuracy for preliminary design while remaining
+computationally lightweight.
+
+Future extensions can include position-dependent ignition along the
+grain length for more accurate prediction in long grains.
+
+\section{Summary}\label{summary-4}
+
+The ignition transient consists of induction, flame spreading, and
+chamber filling phases. It is driven by igniter output,
+convective/radiative heat transfer, and propellant thermal response.
+Proper modeling is essential to predict and limit the initial pressure
+spike, ensuring structural integrity and repeatable motor performance.
+
+With the ignition transient included, the full 0D internal ballistics
+simulation (Chapters 5--9) can now generate complete pressure-time and
+thrust-time curves from t = 0 (igniter firing) through burnout.
+
+In the next chapter we will discuss \textbf{overall motor performance
+metrics}, validation against experimental data, and sensitivity
+analysis.
+
+\section{References}\label{references-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Peretz, A., et al.~(1973). The Starting Transient of Solid-Propellant
+  Rocket Motors with High Internal Gas Velocities. NASA Technical
+  Reports.
+\item
+  Sutton, G. P., \& Biblarz, O. (2017). \emph{Rocket Propulsion
+  Elements}.
+\item
+  Greatrix, D. R. (2012). \emph{Powered Flight -- The Engineering of
+  Aerospace Propulsion}.
+\item
+  Various AIAA papers on ignition transient modeling (e.g., flame
+  spreading and igniter effects).
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+The Python implementation in \texttt{code/simulator.py} includes an
+optional \texttt{ignition\_model} parameter. It supports simple delay +
+ramp functions for flame spreading as well as direct addition of igniter
+mass flow. Examples will demonstrate ignition spike prediction and
+mitigation strategies.
+
+\end{tcolorbox}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-1}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{part}{Appendices}
+\appendix
+
+\chapter{}\label{section-2}
+
+\chapter{}\label{section-3}
+
+\chapter{}\label{section-4}
+
+\chapter{}\label{section-5}
+
+
+
+
+\end{document}

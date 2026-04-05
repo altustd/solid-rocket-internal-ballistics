@@ -1,0 +1,124 @@
+---
+title: "Ignition Transient"
+subtitle: "Pressurization Phase, Ignition Delay, Flame Spreading, and Initial Pressure Spike"
+order: 9
+---
+
+## Introduction
+
+All previous chapters assumed that steady or quasi-steady burning is already established. In reality, every solid rocket motor begins with a distinct **ignition transient** — the short but critical phase between igniter activation and the establishment of stable chamber pressure.
+
+During this phase (typically 0.01–0.5 seconds for amateur motors, longer for large motors), the chamber pressure rises rapidly from ambient to operating level, often overshooting the equilibrium pressure before settling. This "ignition spike" can stress the case, grain, and nozzle, and must be carefully controlled in design.
+
+This chapter describes the physical processes, key stages, and simplified modeling approaches for the ignition transient.
+
+## Stages of the Ignition Transient
+
+The ignition transient is commonly divided into three overlapping phases:
+
+1. **Ignition Induction (Delay) Phase**  
+   The igniter releases hot gases and/or particles into the chamber. Heat is transferred (primarily by convection and radiation) to the propellant surface. No significant propellant burning occurs yet.  
+   The propellant surface temperature rises until it reaches the **ignition temperature** \( T_{ig} \) (typically 500–800 K depending on the propellant).  
+   This phase ends when the first portion of the grain ignites.
+
+2. **Flame Spreading Phase**  
+   Once ignited at one location (usually near the igniter or head end), the flame spreads along the propellant surface.  
+   Flame spreading is driven by convective heating from the hot gases, enhanced by increasing chamber pressure and flow velocity.  
+   Erosive effects and local geometry strongly influence the spreading rate.
+
+3. **Chamber Filling (Pressurization) Phase**  
+   As more surface area ignites, mass generation increases rapidly. The chamber fills with combustion products until the mass outflow through the nozzle balances generation.  
+   Pressure rises sharply, often overshooting the steady-state equilibrium value due to the sudden increase in burning surface before the flow stabilizes.
+
+After these phases, the motor transitions into the steady ballistic phase described in Chapters 5–8.
+
+## Igniter Modeling
+
+The igniter is usually modeled as a time-dependent mass and energy source:
+
+$$
+\dot{m}_{ig}(t), \quad T_{ig}, \quad \text{or total energy input}
+$$
+
+Simple models assume a constant or triangular igniter mass flow rate for a short duration. More advanced models include particle impingement and radiative effects.
+
+The heat flux to the propellant surface during induction is dominated by convection:
+
+$$
+\dot{q}'' = h (T_g - T_s)
+$$
+
+where \( h \) is the convective heat transfer coefficient (often using correlations similar to those in erosive burning models), \( T_g \) is gas temperature, and \( T_s \) is local surface temperature.
+
+## Propellant Heating and Ignition Criterion
+
+During the induction phase, the propellant is treated as inert. The surface temperature rise is governed by the one-dimensional heat conduction equation in the solid phase:
+
+$$
+\rho_p c_p \frac{\partial T}{\partial t} = k \frac{\partial^2 T}{\partial x^2}
+$$
+
+with boundary condition at the surface incorporating the heat flux from the igniter gases.
+
+A common practical ignition criterion is:
+
+- The propellant surface reaches a critical ignition temperature \( T_{ig} \), or
+- The integrated energy input reaches a threshold value.
+
+Once \( T_s \geq T_{ig} \), that surface element begins burning according to Vieille’s law (possibly with erosive correction).
+
+## Simplified 0D Ignition Transient Model
+
+For engineering purposes in the 0D ballistics simulator, a lumped-parameter approach can be used:
+
+- Add igniter mass flow \( \dot{m}_{ig}(t) \) to the mass balance equation.
+- Delay the start of propellant burning until a computed ignition delay time \( t_{ign} \).
+- Ramp up the effective burning area \( A_b(t) \) during flame spreading (e.g., using an exponential or linear ramp function based on grain geometry).
+
+A basic ODE extension during ignition includes the igniter term:
+
+$$
+\frac{V_c}{c^{*2}} \frac{dP_c}{dt} = \rho_p A_b(t) r(P_c) + \dot{m}_{ig}(t) - \frac{P_c A_t}{c^*}
+$$
+
+where \( A_b(t) \) starts from zero (or a small initial value) and grows as flame spreads.
+
+## Causes and Control of Ignition Spike
+
+The initial pressure spike occurs because:
+
+- Flame spreading can ignite a large fraction of the surface almost simultaneously.
+- The burning surface at ignition may be higher than the steady-state value for some geometries.
+- Nozzle flow may not yet be fully choked or established.
+
+Design strategies to reduce harmful spikes include:
+
+- Optimized igniter mass flow and energy (not too strong, not too weak)
+- Grain geometry that promotes controlled flame spreading (e.g., progressive port opening)
+- Nozzle throat closure (burst diaphragm) that opens at a designed pressure
+- Use of ignition aids or inhibitors on parts of the grain
+
+## Numerical Considerations
+
+Full-fidelity modeling of ignition transients often requires quasi-1D or multi-dimensional CFD with coupled gas and solid phases, flame spreading algorithms, and detailed heat transfer. For the purposes of this book and the accompanying Python simulator, we use a simplified 0D model with an optional ignition delay and flame-spreading function. This provides good engineering accuracy for preliminary design while remaining computationally lightweight.
+
+Future extensions can include position-dependent ignition along the grain length for more accurate prediction in long grains.
+
+## Summary
+
+The ignition transient consists of induction, flame spreading, and chamber filling phases. It is driven by igniter output, convective/radiative heat transfer, and propellant thermal response. Proper modeling is essential to predict and limit the initial pressure spike, ensuring structural integrity and repeatable motor performance.
+
+With the ignition transient included, the full 0D internal ballistics simulation (Chapters 5–9) can now generate complete pressure-time and thrust-time curves from t = 0 (igniter firing) through burnout.
+
+In the next chapter we will discuss **overall motor performance metrics**, validation against experimental data, and sensitivity analysis.
+
+## References
+
+- Peretz, A., et al. (1973). The Starting Transient of Solid-Propellant Rocket Motors with High Internal Gas Velocities. NASA Technical Reports.
+- Sutton, G. P., & Biblarz, O. (2017). *Rocket Propulsion Elements*.
+- Greatrix, D. R. (2012). *Powered Flight – The Engineering of Aerospace Propulsion*.
+- Various AIAA papers on ignition transient modeling (e.g., flame spreading and igniter effects).
+
+:::{.callout-note}
+The Python implementation in `code/simulator.py` includes an optional `ignition_model` parameter. It supports simple delay + ramp functions for flame spreading as well as direct addition of igniter mass flow. Examples will demonstrate ignition spike prediction and mitigation strategies.
+:::

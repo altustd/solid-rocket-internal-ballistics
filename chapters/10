@@ -1,0 +1,130 @@
+---
+title: "Full Simulation"
+subtitle: "Putting It All Together — Complete 0D Internal Ballistics Model"
+order: 10
+---
+
+## Introduction
+
+In the previous chapters we developed the individual building blocks of solid rocket motor internal ballistics:
+
+- Propellant properties and burn rate laws (Chapters 2 & 6)
+- Grain geometry and burnback analysis (Chapters 3 & 4)
+- Core 0D differential equations (Chapter 5)
+- Equilibrium pressure and K/N behavior (Chapter 6)
+- Erosive burning corrections (Chapter 7)
+- Nozzle flow, characteristic velocity, and thrust (Chapter 8)
+- Ignition transient modeling (Chapter 9)
+
+This chapter integrates all these components into a **complete, unified 0D internal ballistics simulation**. We now have a practical engineering tool capable of predicting the full pressure-time, thrust-time, and performance curves for any given motor configuration.
+
+## Overall Model Architecture
+
+The complete simulation consists of the following coupled elements:
+
+1. **Grain Burnback Module** — Provides \( A_b(w) \) and port area \( A_p(w) \) as functions of web distance burned.
+2. **Propellant Model** — Supplies \( \rho_p \), \( a \), \( n \), \( c^* \), \( \gamma \), and erosive parameters.
+3. **Igniter Model** — Defines mass flow and energy input during the initial transient.
+4. **ODE System** — Solves the coupled differential equations for chamber pressure \( P_c(t) \) and web distance \( w(t) \).
+5. **Nozzle Model** — Computes mass flow, thrust coefficient \( C_F \), and instantaneous thrust \( F(t) \).
+6. **Optional Corrections** — Erosive burning, temperature sensitivity, throat erosion.
+
+At each time step the simulator:
+- Calculates current burning surface \( A_b \) from burnback
+- Applies burn rate law (with optional erosive correction)
+- Updates chamber pressure via numerical integration
+- Computes mass flow and thrust
+- Advances the burned web distance
+
+## Governing Equations (Full Form)
+
+The core mass balance equation, extended for ignition and erosive burning, is:
+
+$$
+\frac{V_c}{c^{*2}} \frac{dP_c}{dt} = \rho_p A_b(w,t) \, r(P_c, G) + \dot{m}_\text{ig}(t) - \frac{P_c A_t}{c^*}
+$$
+
+where the total burn rate \( r \) is:
+
+$$
+r(P_c, G) = a P_c^n + r_e(G)
+$$
+
+and the erosive component \( r_e \) follows the Lenoir-Robillard model (Chapter 7).
+
+The web distance evolves as:
+
+$$
+\frac{dw}{dt} = r(P_c, G)
+$$
+
+Thrust at any instant is:
+
+$$
+F(t) = C_F \, P_c(t) \, A_t
+$$
+
+(with optional ambient pressure correction).
+
+## Numerical Implementation Strategy
+
+We solve the system using `scipy.integrate.solve_ivp` with the RK45 method (or LSODA for stiff cases). Key implementation details include:
+
+- Adaptive time stepping with maximum step size control during ignition and tail-off
+- Event detection for web burnout (\( w(t) = w_{\max} \))
+- Interpolation of burn area \( A_b(w) \) from the burnback table or analytical function
+- Optional quasi-1D discretization for strong erosive burning (multiple axial segments)
+
+The simulation typically runs from \( t = 0 \) (igniter firing) until propellant is fully consumed or a user-specified end time.
+
+## Typical Simulation Outputs
+
+A complete simulation produces time-series data for:
+
+- Chamber pressure \( P_c(t) \)
+- Thrust \( F(t) \)
+- Mass flow rate \( \dot{m}(t) \)
+- Burning surface area \( A_b(t) \)
+- Port area \( A_p(t) \)
+- Burned web distance \( w(t) \)
+- Cumulative impulse
+- Instantaneous and total specific impulse
+
+These outputs are essential for motor design validation, structural analysis, and optimization.
+
+## Example Workflow
+
+```{{python}}
+# Example structure (detailed implementation in code/simulator.py)
+
+from solid_rocket_ballistics import (
+    Propellant, 
+    Grain, 
+    SolidRocketMotor, 
+    InternalBallisticsSimulator
+)
+
+# Define propellant and grain
+propellant = Propellant.from_json("data/propellants/knsb.json")
+grain = CylindricalGrain(...)          # or StarGrain, FinocylGrain, etc.
+
+motor = SolidRocketMotor(
+    propellant=propellant,
+    grain=grain,
+    throat_area=0.0005,       # m²
+    expansion_ratio=8.0,
+    initial_temperature=298
+)
+
+sim = InternalBallisticsSimulator(motor, erosive=True, ignition_model="ramp")
+
+results = sim.run(t_end=5.0)
+
+# Plot results
+import matplotlib.pyplot as plt
+plt.plot(results["time"], results["pressure"]/1e6, label="Chamber Pressure (MPa)")
+plt.plot(results["time"], results["thrust"], label="Thrust (N)")
+plt.xlabel("Time (s)")
+plt.legend()
+plt.grid(True)
+plt.show()

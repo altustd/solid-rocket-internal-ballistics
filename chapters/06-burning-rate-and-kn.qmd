@@ -1,98 +1,149 @@
-# Burning Rate, Kn Ratio, and Ballistic Performance
+---
+title: "Burning Rate and K/N Ratio"
+subtitle: "Equilibrium Pressure, Stability, and Motor Ballistic Behavior"
+order: 6
+---
 
-## Learning Objectives
+## Introduction
 
-After reading this chapter, you should be able to:
+In Chapter 5 we derived the governing differential equation for chamber pressure evolution using mass conservation. At any instant, the chamber pressure is determined by the balance between **mass generation** from the burning propellant surface and **mass discharge** through the nozzle.
 
-- Understand the difference between strand burning rate and motor burning rate
-- Describe Saint-Robert’s burning rate law and its parameters
-- Define and calculate the **Kn ratio** ($Kn = A_b / A_t$)
-- Explain how the Kn ratio controls chamber pressure
-- Predict basic pressure-time and thrust-time curve shapes from grain geometry
+When the time derivative of pressure is zero (\( \frac{dP_c}{dt} \approx 0 \)), the motor operates at **equilibrium pressure**. This condition dominates most of the burn duration in well-designed motors and is controlled primarily by two quantities:
 
-## Burning Rate Fundamentals
+- The propellant **burn rate law**
+- The **K/N ratio** (\( K_n = A_b / A_t \)), the ratio of burning surface area to nozzle throat area
 
-The **burning rate** ($r_b$) is the linear speed at which the propellant surface regresses (burns) normal to itself, usually expressed in mm/s or in/s.
+This chapter explores these relationships in detail, their implications for motor stability, pressure sensitivity, and how grain geometry (via burnback) shapes the pressure-time and thrust-time curves.
 
-There are two common contexts for measuring burning rate:
+## Vieille’s Law (Saint-Robert’s Law)
 
-- **Strand burning rate** — measured in a Crawford bomb (strand burner) under controlled pressure with inhibited sides. This gives the baseline pressure-dependent burning rate.
-- **Motor burning rate** — the effective regression rate inside an actual rocket motor, which can be higher due to erosive burning, dynamic effects, and other phenomena.
-
-In actual motors, the burning rate is influenced by:
-
-- Chamber pressure ($P_c$)
-- Propellant initial temperature
-- Erosive burning (high gas flow velocity parallel to the surface)
-- Dynamic burning (transient pressurization effects)
-
-## Saint-Robert’s Law (Vieille’s Law)
-
-The most widely used empirical model for burning rate is **Saint-Robert’s law**:
+The linear burn rate \( r \) of most solid propellants follows the empirical power-law relationship known as **Vieille’s law**:
 
 $$
-r_b = a \cdot P_c^n
+r(P_c) = a \, P_c^n
 $$
 
 where:
-- $a$ = burning rate coefficient (depends on propellant formulation and units)
-- $n$ = pressure exponent (typically 0.2–0.7 for stable motors; $n > 0.7$ often leads to instability)
-- $P_c$ = chamber pressure
+- \( r \): linear burn (regression) rate (m/s or mm/s)
+- \( a \): burn rate coefficient (units depend on pressure units, e.g., m/s·Paⁿ)
+- \( n \): dimensionless pressure exponent (typically 0.2–0.7 for stable rocket propellants)
+- \( P_c \): chamber pressure (usually expressed in MPa or Pa)
 
-This power-law relationship captures the strong pressure dependence of solid propellants.
-
-## The Kn Ratio
-
-The **Kn ratio** is one of the most important design parameters in solid rocket motors:
+The coefficient \( a \) is moderately sensitive to the initial propellant temperature \( T_i \):
 
 $$
-Kn = \frac{A_b}{A_t}
+a(T_i) = a_\text{ref} \left[1 + \sigma_p (T_i - T_\text{ref})\right]
 $$
 
-where:
-- $A_b$ = instantaneous burning surface area
-- $A_t$ = nozzle throat area
+where \( \sigma_p \) is the temperature sensitivity of burn rate (typically 0.1–0.3 %/K).
 
-For steady-state operation, chamber pressure can be approximated as:
+A propellant is considered **ballistically stable** only when \( n < 1 \). If \( n \geq 1 \), small pressure perturbations can cause runaway pressure increase, often leading to motor explosion.
+
+## Definition of K/N Ratio
+
+The **K/N ratio** (commonly written \( K_n \) or simply \( K \)) is defined as:
 
 $$
-P_c \approx \left( \frac{Kn \cdot a \cdot \rho_p \cdot c^*}{1} \right)^{\frac{1}{1-n}}
+K_n = \frac{A_b}{A_t}
 $$
 
-Higher Kn produces higher chamber pressure, which in turn increases the burning rate (positive feedback loop until equilibrium is reached).
+- \( A_b \): instantaneous burning surface area (m²), obtained from the burnback model (Chapter 4)
+- \( A_t \): nozzle throat area (m²), a fixed design parameter
 
-## Pressure-Time Relationship
+\( K_n \) is one of the most important design parameters in solid rocket motors. It directly controls the operating pressure level. Typical values for amateur and experimental motors range from 100 to 400, depending on propellant and desired pressure.
 
-The shape of the pressure-time ($P$-$t$) curve is primarily controlled by how the burning surface area $A_b$ (and thus Kn) evolves during the burn. This evolution depends on **grain geometry**:
+## Equilibrium Pressure Derivation
 
-- **Neutral burning**: $A_b$ roughly constant → relatively flat pressure curve
-- **Progressive burning**: $A_b$ increases with time → rising pressure
-- **Regressive burning**: $A_b$ decreases with time → falling pressure
+At steady state, mass generation equals mass outflow:
 
-Many practical grains combine these behaviors (e.g., progressive-neutral-regressive).
+$$
+\dot{m}_\text{gen} = \dot{m}_\text{out}
+$$
 
-## Simple Ballistic Model (0-D)
+$$
+\rho_p \, A_b \, r(P_c) = \frac{P_c A_t}{c^*}
+$$
 
-The simplest “zero-dimensional” model assumes:
-1. Uniform pressure and temperature throughout the chamber
-2. Burning rate follows Saint-Robert’s law
-3. Mass generation rate equals mass expulsion rate through the nozzle at steady state
+Substitute Vieille’s law \( r = a P_c^n \):
 
-This leads to the equilibrium pressure equation shown above and allows basic prediction of pressure and thrust histories.
+$$
+\rho_p \, A_b \, a \, P_c^n = \frac{P_c A_t}{c^*}
+$$
 
-## Exercises
+Rearrange:
 
-1. Given $a = 0.005$ mm/s/MPa$^n$ and $n = 0.4$, calculate the burning rate at $P_c = 5$ MPa and at $P_c = 10$ MPa.
+$$
+\rho_p \, a \, c^* \, \left( \frac{A_b}{A_t} \right) = P_c^{1-n}
+$$
 
-2. A motor has an instantaneous burning surface $A_b = 500$ cm² and nozzle throat $A_t = 5$ cm². Calculate Kn.
+$$
+P_{eq} = \left( \rho_p \, a \, c^* \, K_n \right)^{\frac{1}{1-n}}
+$$
 
-3. Explain why a pressure exponent $n > 0.7$ can make a motor ballistically unstable.
+This is the **equilibrium chamber pressure**. It shows that:
 
-## Key Takeaways
+- Pressure scales strongly with \( K_n \) because of the exponent \( 1/(1-n) \) (often 1.25–3.3).
+- Doubling \( K_n \) typically increases pressure by a factor of ~2.5–3 or more, depending on \( n \).
+- Higher \( n \) makes pressure much more sensitive to changes in \( K_n \).
 
-- Burning rate is strongly pressure-dependent and follows $r_b = a P_c^n$.
-- The **Kn ratio** ($A_b / A_t$) is the primary lever designers use to set operating chamber pressure.
-- Grain geometry controls how Kn changes over time, which directly shapes the pressure-time and thrust-time curves.
-- Understanding burning rate and Kn is foundational before studying erosive burning, transients, or full internal ballistics simulations.
+## K/N Curve and Pressure-Time Profile
 
-**Next Chapter:** Erosive Burning and Other Advanced Phenomena
+As the grain burns, \( A_b \) evolves according to the burnback geometry. Plotting \( K_n(w) \) versus web distance (or time) produces the **K/N curve**.
+
+The shape of this curve determines the ballistic classification of the motor:
+
+- **Neutral** — \( K_n \) roughly constant → nearly constant pressure and thrust (desired for many applications)
+- **Progressive** — \( K_n \) increases with time → rising pressure/thrust
+- **Regressive** — \( K_n \) decreases with time → falling pressure/thrust
+- **Progressive-regressive** (e.g., many star or finocyl grains) — initial rise followed by a drop
+
+Because \( P_{eq} \propto K_n^{1/(1-n)} \), even modest changes in \( K_n \) produce noticeable changes in pressure. Grain designers therefore carefully tailor the geometry so the K/N curve yields the desired thrust profile.
+
+## Stability Considerations
+
+For stable operation, two conditions must be satisfied:
+
+1. \( n < 1 \) (inherent propellant property)
+2. The operating point must lie on the stable intersection of the mass generation curve (\( \dot{m}_\text{gen} \propto P^n \)) and the mass discharge curve (\( \dot{m}_\text{out} \propto P \))
+
+If \( n > 1 \), the mass generation curve becomes steeper than the discharge curve, and any small positive pressure perturbation causes further increase — unstable.
+
+Temperature sensitivity also plays a role. The temperature sensitivity of chamber pressure \( \pi_K \) is related to the burn rate temperature sensitivity \( \sigma_p \) by:
+
+$$
+\pi_K = \frac{\sigma_p}{1 - n}
+$$
+
+This explains why motors with higher \( n \) are more sensitive to ambient temperature changes.
+
+## Practical Design Implications
+
+- **Choosing \( n \)**: Lower \( n \) gives more stable, less temperature-sensitive motors but can make it harder to achieve high thrust.
+- **Choosing \( K_n \)**: Higher \( K_n \) gives higher operating pressure (and usually higher thrust and specific impulse) but increases structural loads and erosive burning risk.
+- **Grain geometry**: The burnback module (Chapter 4) must provide accurate \( A_b(w) \) so the resulting \( K_n(t) \) produces the target pressure curve.
+- **Nozzle sizing**: Once the desired average pressure and propellant are chosen, \( A_t \) is sized to achieve the target \( K_n \).
+
+In the accompanying simulation code, we compute equilibrium pressure analytically when possible, but solve the full transient ODE numerically to capture ignition, tail-off, and deviations caused by changing \( A_b \).
+
+## Summary
+
+The interplay between the burn rate law \( r = a P^n \) and the K/N ratio \( K_n = A_b / A_t \) determines the equilibrium chamber pressure via:
+
+$$
+P_{eq} = \left( \rho_p \, a \, c^* \, K_n \right)^{\frac{1}{1-n}}
+$$
+
+Understanding and controlling the K/N curve through grain geometry is one of the most powerful tools available to the motor designer for shaping thrust-time performance.
+
+In the next chapter we will introduce erosive burning corrections, which become important when high port velocities alter the effective burn rate beyond the simple pressure dependence.
+
+## References
+
+- Sutton, G. P., & Biblarz, O. (2017). *Rocket Propulsion Elements*.
+- Greatrix, D. R. (2012). *Powered Flight – The Engineering of Aerospace Propulsion*.
+- Nakka, R. (various). Solid Rocket Motor Design Resources.
+- Kubota, N. (2004). Principles of Solid Rocket Motor Design.
+
+:::{.callout-note}
+Executable examples showing K/N curve generation from different grain geometries and the resulting pressure-time traces are available in the `examples/` and `code/` directories.
+:::
